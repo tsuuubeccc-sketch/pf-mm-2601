@@ -1,0 +1,1764 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   フリーランスプログラマー M.Miyoshi ポートフォリオ スタイルシート
+   - カラーパレット: 背景 #f0f8ff (アリスブルー), メイン #f0ffff (azure), 文字 #333333
+   - フォント体系: Noto Serif JP（明朝体ベース）, Great Vibes（筆記体）, Plus Jakarta Sans
+   - デザイン哲学: 余白美、すりガラス調グラスモーフィズム、繊細な影とグラデーション
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. デザイン変数（カスタムプロパティ）の定義
+   -------------------------------------------------------------------------- */
+:root {
+  /* 背景色・基本色 */
+  --color-bg-base: #f0f8ff;         /* アリスブルー（ページ全体の背景色） */
+  --color-azure: #f0ffff;           /* Azure（メインカラー・発光アクセント） */
+  --color-white: #ffffff;
+  --color-text-main: #333333;       /* メインテキスト色（視認性と上品さを両立） */
+  --color-text-muted: #667085;      /* 補足説明テキスト色 */
+  --color-text-light: #8e9baa;
+
+  /* アクセント・グラデーション色 */
+  --color-cyan-primary: #0ea5e9;    /* 鮮やかなシアンブルー */
+  --color-cyan-glow: #38bdf8;
+  --color-cyan-pale: #e0f2fe;
+  --color-mint-accent: #14b8a6;
+  --color-gold-subtle: #d4af37;
+
+  /* グラスモーフィズム（すりガラス効果）用スタイル */
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-bg-hover: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --glass-border-subtle: rgba(186, 230, 253, 0.4);
+  --glass-shadow: 0 10px 30px -10px rgba(14, 116, 144, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --glass-shadow-hover: 0 20px 40px -12px rgba(14, 116, 144, 0.16), 0 8px 20px rgba(0, 0, 0, 0.04);
+
+  /* フォント定義 */
+  --font-serif: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-soft-serif: 'Cormorant Garamond', 'Noto Serif JP', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* トランジション（滑らかなアニメーション設定） */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* 角丸の基準値 */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+}
+
+/* --------------------------------------------------------------------------
+   2. リセット CSS & 基本スタイリング
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-serif);
+  color: var(--color-text-main);
+  background-color: var(--color-bg-base);
+  line-height: 1.85;
+  letter-spacing: 0.03em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 見出し・リンク・リストの初期化 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text-main);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* 共通コンテナ（余白を生かした美しい中央配置） */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* セクション共通レイアウト（余白をしっかり確保） */
+.section {
+  padding: 100px 0;
+  position: relative;
+}
+
+/* セクションタイトル（明朝体の美しさと英字サブタイトルの調和） */
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-subtitle {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-cyan-primary);
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #0284c7, #0d9488);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-title {
+  font-size: 2.1rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-main);
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.title-line {
+  width: 46px;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #14b8a6);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.section-intro {
+  text-align: center;
+  max-width: 680px;
+  margin: -24px auto 44px;
+  color: var(--color-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.85;
+  word-break: auto-phrase;
+  line-break: strict;
+}
+
+/* グラスモーフィズムカード共通 */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+
+/* --------------------------------------------------------------------------
+   3. ヘッダー・グローバルナビゲーション
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 18px 0;
+  background: transparent;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding var(--transition-smooth);
+}
+
+/* メインセクション突入時: ヘッダーを画面上部へ退避・非表示化 */
+.site-header.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ロゴデザイン（スクロール有無に関わらず、M: シアンブルー、.Miyoshi: ダークトーンで常時統一） */
+.header-logo {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  overflow: visible;
+}
+
+.logo-script {
+  font-family: var(--font-script);
+  font-size: 2.3rem;
+  color: #0284c7;
+  line-height: 1.25;
+  display: inline-block;
+  padding: 0.1em 0.15em 0.05em 0.1em;
+  margin: -0.1em 0 -0.05em -0.1em;
+  overflow: visible;
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.8));
+}
+
+.logo-text {
+  font-family: var(--font-soft-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #1e293b;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.site-header.scrolled .logo-script {
+  color: #0284c7;
+}
+
+.site-header.scrolled .logo-text {
+  color: #1e293b;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* ナビリンク（初期は白テキスト、ホバー時はシアン） */
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: #ffffff;
+  display: inline-block;
+  padding: 6px 0;
+  position: relative;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 6px rgba(0, 20, 40, 0.5);
+  transition: color var(--transition-fast), text-shadow var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #2dd4bf);
+  transition: width var(--transition-smooth);
+}
+
+.nav-link:hover {
+  color: #38bdf8;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* スクロール時のナビゲーションリンク色 */
+.site-header.scrolled .nav-link {
+  color: #4b5563;
+  text-shadow: none;
+}
+
+.site-header.scrolled .nav-link:hover {
+  color: #0ea5e9;
+}
+
+/* お問い合わせボタン（透過50%以上・フロストガラス） */
+.nav-btn {
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 8px 24px !important;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 4px rgba(0, 20, 40, 0.4);
+  transition: all var(--transition-fast);
+}
+
+.nav-btn::after {
+  display: none !important;
+}
+
+.nav-btn:hover {
+  background: rgba(56, 189, 248, 0.35) !important;
+  border-color: #38bdf8;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
+}
+
+.site-header.scrolled .nav-btn {
+  background: rgba(14, 165, 233, 0.16) !important;
+  color: #0284c7 !important;
+  border-color: rgba(14, 165, 233, 0.45);
+  text-shadow: none;
+}
+
+.site-header.scrolled .nav-btn:hover {
+  background: rgba(14, 165, 233, 0.32) !important;
+  color: #0369a1 !important;
+  border-color: rgba(14, 165, 233, 0.8);
+}
+
+/* モバイルハンバーガーボタン */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #ffffff;
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: all var(--transition-fast);
+}
+
+.site-header.scrolled .menu-toggle span {
+  background: var(--color-text-main);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. ヒーローセクション（ファーストビュー）
+   - 明るく柔らかい光に満ちた草原
+   - M.Miyoshi のサイズ拡大（より存在感ある筆記体＆ソフトセリフ）
+   - 肩書き: 頭文字大文字 (Freelance Web Creator)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 80px 20px;
+}
+
+/* 最背面：草原背景画像レイヤー（明るく鮮やかで柔らかなトーン） */
+.hero-bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  z-index: 1;
+  filter: brightness(1.05) saturate(1.05);
+  transform: scale(1.02);
+  transition: transform 12s ease-out;
+}
+
+/* 背景オーバーレイ（明るく柔らかな光のグラデーション） */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.22) 0%, rgba(240, 248, 255, 0.15) 50%, rgba(186, 230, 253, 0.35) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 中間レイヤー：水面波紋＆キラキラ粒子を描く Canvas */
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* 最前面：コンテンツレイヤー */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 960px;
+  padding: 20px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  animation: heroFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 名前表示（サイズを拡大） */
+.hero-name {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* 筆記体"M": サイズ拡大 6.6rem + 見切れ防止余白 */
+.name-script {
+  font-family: var(--font-script);
+  font-size: 6.6rem;
+  line-height: 1.25;
+  display: inline-block;
+  overflow: visible;
+  padding: 0.2em 0.25em 0.1em 0.15em;
+  margin: -0.2em -0.1em -0.1em -0.15em;
+  background: linear-gradient(135deg, #ffffff 0%, #e0ffff 45%, #7ee6f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* 上品な影の演出 */
+  filter: drop-shadow(0 4px 14px rgba(5, 25, 45, 0.65)) drop-shadow(0 0 24px rgba(240, 255, 255, 0.9));
+}
+
+/* ".Miyoshi": サイズ拡大 4.4rem */
+.name-soft {
+  font-family: var(--font-soft-serif);
+  font-size: 4.4rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  display: inline-block;
+  padding: 0.1em 0.1em 0.05em 0;
+  background: linear-gradient(135deg, #ffffff 10%, #e0f2fe 55%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* 上品な影の演出 */
+  filter: drop-shadow(0 4px 14px rgba(5, 25, 45, 0.65)) drop-shadow(0 0 18px rgba(224, 242, 254, 0.85));
+}
+
+/* 肩書き（頭文字のみ大文字: Freelance Web Creator、名前と同じグラデーションカラー） */
+.hero-tagline {
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: none; /* 頭文字大文字をそのまま表示 */
+  background: linear-gradient(135deg, #ffffff 10%, #e0f2fe 60%, #7ee6f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 8px rgba(5, 25, 45, 0.65)) drop-shadow(0 0 14px rgba(186, 230, 253, 0.8));
+  margin-top: 10px;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. 自己紹介セクション（About）
+   -------------------------------------------------------------------------- */
+.about-simple-content {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-lead {
+  margin-bottom: 24px;
+}
+
+.lead-text {
+  font-size: 1.25rem;
+  line-height: 2;
+  color: #1e293b;
+  letter-spacing: 0.04em;
+  margin: 0 auto;
+}
+
+.lead-text strong {
+  color: #0284c7;
+  font-weight: 600;
+}
+
+.about-desc {
+  margin: 0 auto;
+}
+
+.about-desc p {
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 2.15;
+  letter-spacing: 0.03em;
+}
+
+/* PC等での各行折り返し制御 */
+.text-line {
+  display: block;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. 私のスキルセクション（Skills）
+   - 横並びグリッド（2列×2行）のコンパクトで簡潔なレイアウト
+   -------------------------------------------------------------------------- */
+.skills-grid-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* スキルカード（埋め込み枠：浮き出る動きを解除し、すっきりとした枠線） */
+.skill-card-compact {
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(186, 230, 253, 0.85);
+  box-shadow: 0 2px 10px rgba(14, 116, 144, 0.04);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.skill-card-compact:hover {
+  transform: none; /* 浮き出る動きを解除 */
+  border-color: #38bdf8;
+  box-shadow: 0 2px 10px rgba(14, 116, 144, 0.04);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.skill-badge-num {
+  font-family: var(--font-sans);
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tech-icon-group {
+  display: flex;
+  gap: 8px;
+  font-size: 1.35rem;
+  color: #0ea5e9;
+}
+
+.title-with-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.skill-card-title {
+  font-size: 1.25rem;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.badge-featured {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #0ea5e9, #0d9488);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.skill-card-desc {
+  font-size: 0.92rem;
+  color: #475569;
+  line-height: 1.8;
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+
+.skill-card-desc strong {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* 特長ハイライト（AI駆動開発カード） */
+.card-ai-special {
+  border-color: rgba(56, 189, 248, 0.65);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 253, 250, 0.85));
+  box-shadow: 0 10px 30px rgba(14, 165, 233, 0.1);
+}
+
+/* タグリスト */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-tag {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: rgba(224, 242, 254, 0.7);
+  color: #0369a1;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(186, 230, 253, 0.8);
+}
+
+.tech-tag.tag-ai {
+  background: rgba(240, 253, 250, 0.95);
+  color: #0f766e;
+  border-color: rgba(153, 246, 228, 0.9);
+  font-weight: 600;
+}
+  line-height: 1.6;
+}
+
+
+/* --------------------------------------------------------------------------
+   7. 今まで作成したサイト（Works）
+   - iframe埋め込みブラウザモックアップ
+   - 番号付きリスト形式
+   -------------------------------------------------------------------------- */
+.works-numbered-list {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.work-list-item {
+  padding: 36px;
+}
+
+.work-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(186, 230, 253, 0.6);
+}
+
+.work-number-badge {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0284c7, #0d9488);
+  color: #ffffff;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+}
+
+.work-title {
+  font-size: 1.45rem;
+  color: #1e293b;
+  flex-grow: 1;
+  margin-left: 12px;
+}
+
+.btn-external {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #0369a1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--color-cyan-pale);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.btn-external:hover {
+  background: #0ea5e9;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.work-content-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ブラウザ風モックアップコンテナ */
+.browser-mockup {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 40, 60, 0.1);
+  border: 1px solid rgba(203, 213, 225, 0.8);
+}
+
+.mockup-header {
+  background: #f8fafc;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.mockup-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.mockup-address-bar {
+  flex-grow: 1;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid #e2e8f0;
+}
+
+.mockup-address-bar i {
+  color: #10b981;
+  font-size: 0.68rem;
+}
+
+.mockup-btn-reload {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 0.82rem;
+  transition: color var(--transition-fast);
+}
+
+.mockup-btn-reload:hover {
+  color: #0ea5e9;
+}
+
+/* iframeコンテナ（レスポンシブな高さ・スムーズなスクロール） */
+.iframe-container {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  background: #ffffff;
+}
+
+.iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* 作品解説情報 */
+.work-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0369a1;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-text {
+  font-size: 0.92rem;
+  color: var(--color-text-main);
+  line-height: 1.8;
+}
+
+.point-bullet-list {
+  padding-left: 18px;
+  list-style: disc;
+  color: var(--color-text-muted);
+}
+
+.point-bullet-list li {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+.role-text {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. アピールセクション（Appeal）
+   -------------------------------------------------------------------------- */
+.appeal-statement {
+  max-width: 1040px;
+  margin: -10px auto 44px;
+  text-align: center;
+  background: none;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0 16px;
+}
+
+.statement-text {
+  font-size: 1.0rem;
+  line-height: 2.1;
+  color: #1e293b;
+  letter-spacing: 0.02em;
+}
+
+.statement-text .text-line {
+  display: block;
+  white-space: nowrap;
+}
+
+/* 注釈テキスト */
+.section-note {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.appeal-numbered-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* アピールカード（01〜03：埋め込み枠・浮き出る設定解除） */
+.appeal-card {
+  padding: 32px 28px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(186, 230, 253, 0.85);
+  box-shadow: 0 2px 10px rgba(14, 116, 144, 0.04);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.appeal-card:hover {
+  transform: none; /* 浮き出る動きを解除 */
+  border-color: #38bdf8;
+  box-shadow: 0 2px 10px rgba(14, 116, 144, 0.04);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.appeal-num {
+  font-family: var(--font-sans);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #bae6fd;
+  margin-bottom: 8px;
+}
+
+.appeal-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-cyan-pale);
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+
+.appeal-card-title {
+  font-size: 1.12rem;
+  color: #0f172a;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.appeal-card-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+}
+
+
+/* --------------------------------------------------------------------------
+   9. お問い合わせセクション（Contact）
+   -------------------------------------------------------------------------- */
+.contact-flow-card {
+  max-width: 760px;
+  margin: 0 auto 32px;
+  padding: 28px 36px;
+}
+
+.flow-title {
+  font-size: 1.08rem;
+  color: #1e293b;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-steps-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.step-item {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.step-item.highlight-step {
+  border-color: #38bdf8;
+  background: rgba(240, 249, 255, 0.9);
+}
+
+.step-num {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0284c7;
+}
+
+.step-text {
+  font-size: 0.82rem;
+  color: #334155;
+  line-height: 1.5;
+}
+
+.contact-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 44px;
+  position: relative;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.required-badge {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 15px;
+  left: 16px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  color: var(--color-text-main);
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+}
+
+.form-textarea {
+  padding-left: 16px;
+  resize: vertical;
+}
+
+.form-input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+  background: #ffffff;
+}
+
+.form-submit-wrap {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.btn-submit {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #0ea5e9, #0d9488);
+  color: #ffffff;
+  border: none;
+  padding: 14px 44px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+  transition: all var(--transition-fast);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(14, 165, 233, 0.4);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+.form-notice {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* 送信完了トースト */
+.form-success-toast {
+  display: none;
+  align-items: center;
+  gap: 16px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  padding: 18px 24px;
+  border-radius: var(--radius-md);
+  margin-top: 24px;
+  animation: fadeInToast 0.4s ease forwards;
+}
+
+.form-success-toast i {
+  font-size: 1.8rem;
+  color: #22c55e;
+}
+
+.form-success-toast h4 {
+  font-size: 1rem;
+  color: #15803d;
+  margin-bottom: 2px;
+}
+
+.form-success-toast p {
+  font-size: 0.88rem;
+  color: #166534;
+}
+
+@keyframes fadeInToast {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --------------------------------------------------------------------------
+   10. フッター
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: #ffffff;
+  border-top: 1px solid rgba(186, 230, 253, 0.8);
+  padding: 40px 0;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: baseline;
+}
+
+.footer-copy {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+
+/* --------------------------------------------------------------------------
+   11. スクロール連動アニメーション（Intersection Observer）
+   -------------------------------------------------------------------------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* --------------------------------------------------------------------------
+   12. シャボン玉風フローティングナビゲーション
+   - 画面右下に固定配置
+   - ヒーローセクションでは非表示、メインセクションでフェードイン
+   - 丸枠ハンバーガーをクリックで波紋＆シャボン玉がはじけるようにセクションリンク展開
+   - 背景は完全透過ですりガラスが自然に各セクションに調和
+   -------------------------------------------------------------------------- */
+.floating-bubble-nav {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 990;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(24px) scale(0.92);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* メインセクション到達時に表示 */
+.floating-bubble-nav.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* メニュー展開時の背景クリック受け（暗い幕やボケを排除し完全透過で馴染ませる） */
+.bubble-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 980;
+  pointer-events: none;
+  opacity: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.floating-bubble-nav.is-open .bubble-backdrop {
+  pointer-events: auto;
+}
+
+/* 固定ボタングループ（縦並び：丸枠ボタンが上、Contactが下） */
+.floating-btn-stack {
+  position: relative;
+  z-index: 995;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 丸枠ハンバーガーメニューボタン（シャボン玉トリガー・透明感のあるフロストガラス） */
+.bubble-toggle-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  outline: none;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px -4px rgba(14, 165, 233, 0.25), 0 2px 6px rgba(0, 0, 0, 0.04), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: visible;
+}
+
+.bubble-toggle-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 28px -4px rgba(14, 165, 233, 0.4), inset 0 2px 4px rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.bubble-toggle-btn:active {
+  transform: scale(0.96);
+}
+
+/* シャボン玉上部のハイライト反射 */
+.toggle-bubble-highlight {
+  position: absolute;
+  top: 3px;
+  left: 9px;
+  width: 20px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.2));
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+
+/* クリック時に発生する水面波紋エフェクト */
+.ripple-wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #38bdf8;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1);
+}
+
+.ripple-wave.animate-ripple {
+  animation: ripplePop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes ripplePop {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* ハンバーガー3本線アイコン（×へモーフィング変形） */
+.hamburger-bubble-icon {
+  width: 20px;
+  height: 14px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hamburger-bubble-icon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #0284c7;
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease, background-color 0.3s ease;
+}
+
+/* メニューオープン時の丸枠ボタン（透明感を維持しながらアクティブ発光） */
+.floating-bubble-nav.is-open .bubble-toggle-btn {
+  background: rgba(224, 242, 254, 0.75);
+  border-color: rgba(56, 189, 248, 0.9);
+  box-shadow: 0 10px 28px rgba(14, 165, 233, 0.35), inset 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
+.floating-bubble-nav.is-open .hamburger-bubble-icon span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.floating-bubble-nav.is-open .hamburger-bubble-icon span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.floating-bubble-nav.is-open .hamburger-bubble-icon span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Contactボタン（透明感と鮮やかさを兼ね備えたフロスト調） */
+.floating-contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.9) 0%, rgba(2, 132, 199, 0.9) 60%, rgba(13, 148, 136, 0.9) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff !important;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: 0 8px 20px -3px rgba(14, 165, 233, 0.38), 0 3px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+}
+
+.contact-bubble-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), transparent);
+  border-radius: var(--radius-full) var(--radius-full) 0 0;
+  pointer-events: none;
+}
+
+.floating-contact-btn i {
+  font-size: 0.95rem;
+}
+
+.floating-contact-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 12px 26px -3px rgba(14, 165, 233, 0.5), 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: #ffffff !important;
+}
+
+.floating-contact-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* シャボン玉メニュークラスタ（丸枠ボタンの中心を基準に展開） */
+.bubble-menu-cluster {
+  position: absolute;
+  right: 0;
+  bottom: 58px;
+  width: 52px;
+  height: 52px;
+  z-index: 992;
+  pointer-events: none;
+}
+
+.bubble-item {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.95), rgba(240, 249, 255, 0.7) 55%, rgba(224, 242, 254, 0.6) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 22px rgba(14, 165, 233, 0.22), 0 2px 6px rgba(0, 0, 0, 0.03), inset 0 2px 6px rgba(255, 255, 255, 0.95), inset 0 -2px 5px rgba(56, 189, 248, 0.22);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(0, 0) scale(0.2);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, box-shadow 0.3s ease;
+  overflow: visible;
+}
+
+/* シャボン玉の光沢ハイライト */
+.bubble-glow {
+  position: absolute;
+  top: 3px;
+  left: 7px;
+  width: 16px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+
+.bubble-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  line-height: 1;
+}
+
+.bubble-content i {
+  font-size: 0.9rem;
+  color: #0284c7;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.bubble-text {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #1e293b;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+/* メニューオープン時のシャボン玉展開（上〜左方向への広角扇型展開でContactボタンとの重なりを完全解消） */
+.floating-bubble-nav.is-open .bubble-item {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 1. TOP バブル (真上〜やや右 85°) */
+.floating-bubble-nav.is-open .bubble-item-1 {
+  transform: translate(10px, -108px) scale(1);
+  transition-delay: 0.03s;
+  animation: bubbleFloat1 4s ease-in-out infinite 0.5s;
+}
+
+/* 2. About バブル (斜め上 112°) */
+.floating-bubble-nav.is-open .bubble-item-2 {
+  transform: translate(-40px, -100px) scale(1);
+  transition-delay: 0.07s;
+  animation: bubbleFloat2 4.2s ease-in-out infinite 0.6s;
+}
+
+/* 3. Skills バブル (左斜め上 138°) */
+.floating-bubble-nav.is-open .bubble-item-3 {
+  transform: translate(-80px, -72px) scale(1);
+  transition-delay: 0.11s;
+  animation: bubbleFloat3 3.8s ease-in-out infinite 0.7s;
+}
+
+/* 4. Works バブル (真左〜やや上 164°) */
+.floating-bubble-nav.is-open .bubble-item-4 {
+  transform: translate(-104px, -30px) scale(1);
+  transition-delay: 0.15s;
+  animation: bubbleFloat4 4.4s ease-in-out infinite 0.8s;
+}
+
+/* 5. Appeal バブル (真左〜やや下 190°: Contactボタンの遥か左側に十分な余白で配置) */
+.floating-bubble-nav.is-open .bubble-item-5 {
+  transform: translate(-106px, 18px) scale(1);
+  transition-delay: 0.19s;
+  animation: bubbleFloat5 3.9s ease-in-out infinite 0.9s;
+}
+
+/* バブルのふわふわ浮遊キーフレーム（各バブルの展開位置に合わせた微小モーション） */
+@keyframes bubbleFloat1 {
+  0%, 100% { transform: translate(10px, -108px) translateY(0); }
+  50% { transform: translate(10px, -108px) translateY(-4px); }
+}
+
+@keyframes bubbleFloat2 {
+  0%, 100% { transform: translate(-40px, -100px) translateY(0); }
+  50% { transform: translate(-40px, -100px) translateY(-5px); }
+}
+
+@keyframes bubbleFloat3 {
+  0%, 100% { transform: translate(-80px, -72px) translateY(0); }
+  50% { transform: translate(-80px, -72px) translateY(-4px); }
+}
+
+@keyframes bubbleFloat4 {
+  0%, 100% { transform: translate(-104px, -30px) translateY(0); }
+  50% { transform: translate(-104px, -30px) translateY(-4px); }
+}
+
+@keyframes bubbleFloat5 {
+  0%, 100% { transform: translate(-106px, 18px) translateY(0); }
+  50% { transform: translate(-106px, 18px) translateY(-4px); }
+}
+
+/* 各バブルのホバーエフェクト（シャボン玉がぷるんと膨らむ） */
+.floating-bubble-nav.is-open .bubble-item:hover {
+  box-shadow: 0 12px 28px rgba(14, 165, 233, 0.4), 0 0 16px rgba(56, 189, 248, 0.45), inset 0 2px 6px rgba(255, 255, 255, 1);
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 1), rgba(224, 242, 254, 0.9) 60%, rgba(186, 230, 253, 0.8) 100%);
+  border-color: #38bdf8;
+  z-index: 1000;
+}
+
+.floating-bubble-nav.is-open .bubble-item-1:hover { transform: translate(10px, -108px) scale(1.15) !important; }
+.floating-bubble-nav.is-open .bubble-item-2:hover { transform: translate(-40px, -100px) scale(1.15) !important; }
+.floating-bubble-nav.is-open .bubble-item-3:hover { transform: translate(-80px, -72px) scale(1.15) !important; }
+.floating-bubble-nav.is-open .bubble-item-4:hover { transform: translate(-104px, -30px) scale(1.15) !important; }
+.floating-bubble-nav.is-open .bubble-item-5:hover { transform: translate(-106px, 18px) scale(1.15) !important; }
+
+.floating-bubble-nav.is-open .bubble-item:hover .bubble-content i {
+  color: #0284c7;
+  transform: scale(1.1);
+}
+
+.floating-bubble-nav.is-open .bubble-item:hover .bubble-text {
+  color: #0284c7;
+}
+
+
+/* --------------------------------------------------------------------------
+   13. レスポンシブ対応（メディアクエリ）
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .work-content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ai-workflow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .appeal-numbered-list {
+    grid-template-columns: 1fr;
+  }
+
+  .about-points {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-steps-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* タブレット以下でのアピール文の自然な折り返し */
+  .statement-text .text-line {
+    white-space: normal;
+    display: inline;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 12px 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: rgba(240, 248, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 80px 24px 24px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    transition: right var(--transition-smooth);
+  }
+
+  .nav-menu.is-active {
+    right: 0;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  /* ヒーローセクション調整（モバイル） */
+  .hero-content {
+    padding: 10px;
+  }
+
+  .name-script {
+    font-size: 4.2rem;
+    padding: 0.15em 0.2em 0.1em 0.1em;
+  }
+
+  .name-soft {
+    font-size: 2.6rem;
+    padding: 0.1em 0.05em 0.05em 0;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+    letter-spacing: 0.18em;
+  }
+
+  .section {
+    padding: 70px 0;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+
+  .skills-grid-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .nav-menu .nav-link {
+    color: #1e293b !important;
+    text-shadow: none !important;
+  }
+
+  .nav-menu .nav-btn {
+    color: #0284c7 !important;
+    background: rgba(14, 165, 233, 0.18) !important;
+    border-color: rgba(14, 165, 233, 0.45) !important;
+    text-shadow: none !important;
+  }
+
+  .iframe-container {
+    height: 300px;
+  }
+
+  /* モバイルでの自己紹介テキストの自然な折り返し（inline表示） */
+  .text-line {
+    display: inline;
+  }
+
+  .lead-text {
+    font-size: 1.1rem;
+  }
+
+  .about-desc p {
+    font-size: 0.95rem;
+  }
+
+  .appeal-statement {
+    padding: 24px 20px;
+  }
+
+  .statement-text {
+    font-size: 0.95rem;
+  }
+
+  /* モバイルでのフローティングナビゲーション位置微調整 */
+  .floating-bubble-nav {
+    right: 18px;
+    bottom: 20px;
+  }
+
+  .bubble-toggle-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .bubble-menu-cluster {
+    bottom: 54px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .bubble-item {
+    width: 44px;
+    height: 44px;
+  }
+
+  .floating-contact-btn {
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+
+  /* モバイルでのバブル展開座標（画面内に綺麗に収まりContactボタンと完全分離） */
+  .floating-bubble-nav.is-open .bubble-item-1 { transform: translate(8px, -92px) scale(1); }
+  .floating-bubble-nav.is-open .bubble-item-2 { transform: translate(-34px, -85px) scale(1); }
+  .floating-bubble-nav.is-open .bubble-item-3 { transform: translate(-68px, -62px) scale(1); }
+  .floating-bubble-nav.is-open .bubble-item-4 { transform: translate(-88px, -26px) scale(1); }
+  .floating-bubble-nav.is-open .bubble-item-5 { transform: translate(-90px, 16px) scale(1); }
+
+  .floating-bubble-nav.is-open .bubble-item-1:hover { transform: translate(8px, -92px) scale(1.1) !important; }
+  .floating-bubble-nav.is-open .bubble-item-2:hover { transform: translate(-34px, -85px) scale(1.1) !important; }
+  .floating-bubble-nav.is-open .bubble-item-3:hover { transform: translate(-68px, -62px) scale(1.1) !important; }
+  .floating-bubble-nav.is-open .bubble-item-4:hover { transform: translate(-88px, -26px) scale(1.1) !important; }
+  .floating-bubble-nav.is-open .bubble-item-5:hover { transform: translate(-90px, 16px) scale(1.1) !important; }
+}

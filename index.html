@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- 文字コードとビューポートの設定（スマホ・タブレット・PC対応） -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="フリーランスエンジニア M.Miyoshi のポートフォリオサイト。ホームページ制作・LP制作からAI駆動開発による高品質・迅速なWeb制作を提供します。">
+  <title>M.Miyoshi | Freelance Web Creator Portfolio</title>
+
+  <!-- Google Fonts: 日本語明朝体（Noto Serif JP）、筆記体（Great Vibes）、サンセリフ（Plus Jakarta Sans / Cormorant Garamond） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Noto+Serif+JP:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons (軽量なアイコンセット) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- スタイルシートの読み込み -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =================================================== -->
+  <!-- ヘッダー・グローバルナビゲーション -->
+  <!-- =================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="header-container">
+      <a href="#hero" class="header-logo">
+        <span class="logo-script">M</span><span class="logo-text">.Miyoshi  Portfolio Site</span>
+      </a>
+
+      <!-- ナビゲーションメニュー（英語表記・シンプルなリンクと透過ボタン） -->
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#works" class="nav-link">Works</a></li>
+          <li><a href="#appeal" class="nav-link">Appeal</a></li>
+          <li><a href="#contact" class="nav-link nav-btn">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- モバイル用ハンバーガーボタン -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="メニューを開閉する">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- =================================================== -->
+    <!-- 1. ヒーローセクション（ファーストビュー） -->
+    <!-- 背景写真 + 波紋Canvas + M.Miyoshi + Freelance Web Creatorのみ配置 -->
+    <!-- =================================================== -->
+    <section class="hero-section" id="hero">
+      <!-- 最背面：草原背景画像レイヤー -->
+      <div class="hero-bg-layer" style="background-image: url('assets/images/hero_meadow.jpg');"></div>
+      
+      <!-- 背景オーバーレイ（透明度を上げて写真の美しさを際立たせつつテキスト視認性を確保） -->
+      <div class="hero-overlay"></div>
+
+      <!-- 中間：マウス軌跡による水面波紋＆キラキラ描画Canvas -->
+      <canvas id="hero-canvas" class="hero-canvas"></canvas>
+
+      <!-- 最前面：テキストコンテンツ（余計な枠や写真は排除し、名前と肩書きのみ洗練して配置） -->
+      <div class="hero-content">
+        <!-- 名前表示：1文字目"M"は筆記体、".Miyoshi"は柔らかい字体、グラデーション+上品なtext-shadow -->
+        <h1 class="hero-name">
+          <span class="name-script">M</span><span class="name-soft">.Miyoshi</span>
+        </h1>
+
+        <!-- 肩書き：名前と同色のシアン〜ホワイト系グラデーション -->
+        <p class="hero-tagline">Freelance Web Creator</p>
+      </div>
+    </section>
+
+
+    <!-- =================================================== -->
+    <!-- 2. 自己紹介セクション（About） -->
+    <!-- 枠をつけず、洗練されたシンプルな流れの見栄え -->
+    <!-- =================================================== -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <!-- セクション共通タイトル -->
+        <div class="section-header fade-in">
+          <span class="section-subtitle">About Me</span>
+          <h2 class="section-title">自己紹介</h2>
+          <div class="title-line"></div>
+        </div>
+
+        <!-- 枠を外し、自然で上質な流れで読ませるレイアウト -->
+        <div class="about-simple-content fade-in">
+          <div class="about-lead">
+            <p class="lead-text">
+              <span class="text-line">はじめまして、<strong>M.Miyoshi</strong>です。</span>
+              <span class="text-line">フリーランスのエンジニアとして、<strong>ホームページ制作</strong>や<strong>LP制作</strong>を行っております。</span>
+            </p>
+          </div>
+          
+          <div class="about-desc">
+            <p>
+              <span class="text-line">丁寧なコミュニケーションを何より大切にし、お客様が思い描く世界観やビジネスの強みを、</span>
+              <span class="text-line">繊細で使い心地のよいWebサイトとして形にします。企画段階のイメージの言語化から</span>
+              <span class="text-line">デザイン設計、実装・公開後のサポートまで誠心誠意ご対応いたします。</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =================================================== -->
+    <!-- 3. 私のスキルセクション（Skills） -->
+    <!-- 番号付きリストによる技術スタックとAI駆動開発の具体例 -->
+    <!-- =================================================== -->
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-subtitle">Skills & Technologies</span>
+          <h2 class="section-title">私のスキル</h2>
+          <div class="title-line"></div>
+        </div>
+
+        <p class="section-intro fade-in">
+          <span class="text-line">確かな基礎技術に加え、最新のAIエディタを制作工程に組み込むことで、</span>
+          <span class="text-line">高品質かつスピーディーな開発を実現します。</span>
+        </p>
+
+        <!-- 横並び（グリッド）形式でのスキル一覧表示 -->
+        <ol class="skills-grid-list">
+          
+          <!-- スキル 01: フロントエンド -->
+          <li class="skill-card-compact glass-card fade-in">
+            <div class="card-top-row">
+              <span class="skill-badge-num">01</span>
+              <div class="tech-icon-group">
+                <i class="fa-brands fa-html5"></i>
+                <i class="fa-brands fa-css3-alt"></i>
+                <i class="fa-brands fa-js"></i>
+              </div>
+            </div>
+            <h3 class="skill-card-title">HTML / CSS / JavaScript</h3>
+            <p class="skill-card-desc">
+              意味構造を意識したセマンティックコーディングと、余白美を活かしたレスポンシブデザイン。動きのあるUIアニメーションも軽快に実装します。
+            </p>
+            <div class="tag-list">
+              <span class="tech-tag">HTML5/CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">レスポンシブ</span>
+            </div>
+          </li>
+
+          <!-- スキル 02: バックエンド・DB -->
+          <li class="skill-card-compact glass-card fade-in">
+            <div class="card-top-row">
+              <span class="skill-badge-num">02</span>
+              <div class="tech-icon-group">
+                <i class="fa-brands fa-php"></i>
+                <i class="fa-solid fa-database"></i>
+              </div>
+            </div>
+            <h3 class="skill-card-title">PHP / SQL</h3>
+            <p class="skill-card-desc">
+              お問い合わせフォームの安全なデータ送受信や自動返信メール、データベースと連動した動的なWeb機能の構築に対応いたします。
+            </p>
+            <div class="tag-list">
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">SQL</span>
+              <span class="tech-tag">フォーム実装</span>
+            </div>
+          </li>
+
+          <!-- スキル 03: 開発管理・デプロイ -->
+          <li class="skill-card-compact glass-card fade-in">
+            <div class="card-top-row">
+              <span class="skill-badge-num">03</span>
+              <div class="tech-icon-group">
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+            </div>
+            <h3 class="skill-card-title">GitHub / Vercel</h3>
+            <p class="skill-card-desc">
+              Git/GitHubを用いた確実なコード管理と、Vercel等の高速ホスティングを活用した迅速な本番公開・更新運用を行います。
+            </p>
+            <div class="tag-list">
+              <span class="tech-tag">Git / GitHub</span>
+              <span class="tech-tag">Vercel</span>
+              <span class="tech-tag">バージョン管理</span>
+            </div>
+          </li>
+
+          <!-- スキル 04: AI駆動開発 -->
+          <li class="skill-card-compact glass-card card-ai-special fade-in">
+            <div class="card-top-row">
+              <span class="skill-badge-num">04</span>
+              <div class="tech-icon-group">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <i class="fa-solid fa-microchip"></i>
+              </div>
+            </div>
+            <div class="title-with-badge">
+              <h3 class="skill-card-title">AI駆動開発</h3>
+              <span class="badge-featured">特長</span>
+            </div>
+            <p class="skill-card-desc">
+              <strong>AntigravityなどのAIエディタを使用した開発フロー</strong>により超高速に具現化。<strong>設計相談やデバッグにAIを活用</strong>し高品質を両立します。
+            </p>
+            <div class="tag-list">
+              <span class="tech-tag tag-ai">Antigravity / Cursor</span>
+              <span class="tech-tag tag-ai">設計相談・AIデバッグ</span>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- =================================================== -->
+    <!-- 4. 今まで作成したサイト（Works / 制作物） -->
+    <!-- iframeによる実画面プレビュー埋め込み + 番号付きリスト -->
+    <!-- =================================================== -->
+    <section class="section works-section" id="works">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-subtitle">Portfolio Works</span>
+          <h2 class="section-title">制作物</h2>
+          <div class="title-line"></div>
+        </div>
+
+        <p class="section-intro fade-in">
+          <span class="text-line">架空の企業・店舗を想定して作成した課題制作物です。</span>
+          <span class="text-line section-note">※ 挿入画像などは仮画像として使用しております。</span>
+        </p>
+
+        <!-- 番号付きリスト形式でのWorks一覧 -->
+        <ol class="works-numbered-list">
+
+          <!-- 作品 01: カフェLP -->
+          <li class="work-list-item glass-card fade-in">
+            <div class="work-header-row">
+              <div class="work-number-badge">Work 01</div>
+              <h3 class="work-title">架空カフェのLP</h3>
+              <div class="work-actions">
+                <a href="https://cafe-lp-202608.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-external" title="別タブで開く">
+                  <span>全画面で見る</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="work-content-grid">
+              <!-- iframe埋め込みブラウザモックアップ -->
+              <div class="browser-mockup">
+                <div class="mockup-header">
+                  <div class="mockup-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <div class="mockup-address-bar">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>https://cafe-lp-202608.vercel.app</span>
+                  </div>
+                  <div class="mockup-actions">
+                    <button class="mockup-btn-reload" data-target="iframe-work-1" title="再読み込み">
+                      <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="iframe-container">
+                  <iframe id="iframe-work-1" src="https://cafe-lp-202608.vercel.app" title="架空カフェのLP" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+              </div>
+
+              <!-- 作品解説情報 -->
+              <div class="work-info">
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-file-lines"></i> 概要・コンセプト</h4>
+                  <p class="info-text">
+                    心地よい木漏れ日と自家製コーヒーの温もりを届ける、落ち着いたトーンのカフェLP。
+                    来店予約への導線を自然に配置し、写真を際立たせるレイアウトで店舗の雰囲気をダイレクトに伝えます。
+                  </p>
+                </div>
+
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
+                  <ul class="point-bullet-list">
+                    <li>柔らかなアースカラーと視線誘導を意識したセクション配置</li>
+                    <li>スマートフォン表示でのメニュー閲覧性を重視したレスポンシブ設計</li>
+                  </ul>
+                </div>
+
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-code"></i> 使用技術・担当範囲</h4>
+                  <div class="tag-list">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Vercel</span>
+                  </div>
+                  <p class="role-text">担当：企画構成 / UIデザイン / コーディング / デプロイ</p>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+          <!-- 作品 02: IT企業コーポレートサイト -->
+          <li class="work-list-item glass-card fade-in">
+            <div class="work-header-row">
+              <div class="work-number-badge">Work 02</div>
+              <h3 class="work-title">架空IT企業コーポレートサイト</h3>
+              <div class="work-actions">
+                <a href="https://it-ken-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="btn-external" title="別タブで開く">
+                  <span>全画面で見る</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="work-content-grid">
+              <!-- iframe埋め込みブラウザモックアップ -->
+              <div class="browser-mockup">
+                <div class="mockup-header">
+                  <div class="mockup-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <div class="mockup-address-bar">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>https://it-ken-202608.vercel.app/index.html</span>
+                  </div>
+                  <div class="mockup-actions">
+                    <button class="mockup-btn-reload" data-target="iframe-work-2" title="再読み込み">
+                      <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="iframe-container">
+                  <iframe id="iframe-work-2" src="https://it-ken-202608.vercel.app/index.html" title="架空IT企業コーポレートサイト" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+              </div>
+
+              <!-- 作品解説情報 -->
+              <div class="work-info">
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-file-lines"></i> 概要・コンセプト</h4>
+                  <p class="info-text">
+                    信頼感と先進性を伝えるITソリューション企業のコーポレートサイト。
+                    事業内容・ニュース・会社概要・採用情報などを整然と整理し、見やすさと清潔感を両立しました。
+                  </p>
+                </div>
+
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
+                  <ul class="point-bullet-list">
+                    <li>信頼性を与える知的で洗練されたブルー系カラースキーム</li>
+                    <li>BtoBユーザーが求める情報へ迷わず辿り着ける明確な情報階層</li>
+                  </ul>
+                </div>
+
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-code"></i> 使用技術・担当範囲</h4>
+                  <div class="tag-list">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Vercel</span>
+                  </div>
+                  <p class="role-text">担当：情報設計 / ページ構成 / レスポンシブ実装 / 公開</p>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+          <!-- 作品 03: レストランWebサイト -->
+          <li class="work-list-item glass-card fade-in">
+            <div class="work-header-row">
+              <div class="work-number-badge">Work 03</div>
+              <h3 class="work-title">架空レストランWebサイト</h3>
+              <div class="work-actions">
+                <a href="https://lst-ryu-202608-be2h.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="btn-external" title="別タブで開く">
+                  <span>全画面で見る</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="work-content-grid">
+              <!-- iframe埋め込みブラウザモックアップ -->
+              <div class="browser-mockup">
+                <div class="mockup-header">
+                  <div class="mockup-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <div class="mockup-address-bar">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>https://lst-ryu-202608-be2h.vercel.app/index.html</span>
+                  </div>
+                  <div class="mockup-actions">
+                    <button class="mockup-btn-reload" data-target="iframe-work-3" title="再読み込み">
+                      <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="iframe-container">
+                  <iframe id="iframe-work-3" src="https://lst-ryu-202608-be2h.vercel.app/index.html" title="架空レストランWebサイト" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+              </div>
+
+              <!-- 作品解説情報 -->
+              <div class="work-info">
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-file-lines"></i> 概要・コンセプト</h4>
+                  <p class="info-text">
+                    上質な食体験と特別な時間を演出するダイニングレストランの公式Webサイト。
+                    季節のコース料理やシェフのこだわりを情緒的なビジュアルと細やかなタイポグラフィで表現しました。
+                  </p>
+                </div>
+
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
+                  <ul class="point-bullet-list">
+                    <li>高級感とシズル感を引き立てるダークトーン＆ゴールドの調和</li>
+                    <li>コース詳細とオンライン予約へ直結するスムーズな動線設計</li>
+                  </ul>
+                </div>
+
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-code"></i> 使用技術・担当範囲</h4>
+                  <div class="tag-list">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">レスポンシブ</span>
+                  </div>
+                  <p class="role-text">担当：世界観設計 / メニュー構造化 / コーディング / 最適化</p>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+          <!-- 作品 04: アパレルECサイト -->
+          <li class="work-list-item glass-card fade-in">
+            <div class="work-header-row">
+              <div class="work-number-badge">Work 04</div>
+              <h3 class="work-title">架空アパレルECサイト</h3>
+              <div class="work-actions">
+                <a href="https://ec-eri-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="btn-external" title="別タブで開く">
+                  <span>全画面で見る</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="work-content-grid">
+              <!-- iframe埋め込みブラウザモックアップ -->
+              <div class="browser-mockup">
+                <div class="mockup-header">
+                  <div class="mockup-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <div class="mockup-address-bar">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>https://ec-eri-202608.vercel.app/index.html</span>
+                  </div>
+                  <div class="mockup-actions">
+                    <button class="mockup-btn-reload" data-target="iframe-work-4" title="再読み込み">
+                      <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="iframe-container">
+                  <iframe id="iframe-work-4" src="https://ec-eri-202608.vercel.app/index.html" title="架空アパレルECサイト" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+              </div>
+
+              <!-- 作品解説情報 -->
+              <div class="work-info">
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-file-lines"></i> 概要・コンセプト</h4>
+                  <p class="info-text">
+                    シンプル＆モダンなトレンドアイテムを取り揃えたファッションECサイト。
+                    商品カードのグリッドレイアウトやカート導線など、購買意欲を高めるUI/UXを意識して構築しました。
+                  </p>
+                </div>
+
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
+                  <ul class="point-bullet-list">
+                    <li>アイテムが引き立つミニマルな余白設計と直感的なフィルタリングUI</li>
+                    <li>モバイル端末でのショッピング体験を考慮した親指操作エリアの最適化</li>
+                  </ul>
+                </div>
+
+                <div class="info-block">
+                  <h4 class="info-label"><i class="fa-solid fa-code"></i> 使用技術・担当範囲</h4>
+                  <div class="tag-list">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">EC-UI設計</span>
+                  </div>
+                  <p class="role-text">担当：EC-UI設計 / カタロググリッド構築 / スタイリング / 実装</p>
+                </div>
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- =================================================== -->
+    <!-- 5. アピールセクション（Appeal） -->
+    <!-- AI-Driven Developerとしての強み・キャッチアップ力・寄り添う姿勢 -->
+    <!-- =================================================== -->
+    <section class="section appeal-section" id="appeal">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-subtitle">Why Choose Me</span>
+          <h2 class="section-title">私のアピール・強み</h2>
+          <div class="title-line"></div>
+        </div>
+
+        <!-- アピール自己紹介文（枠を除去し、テキストのみで配置） -->
+        <div class="appeal-statement fade-in">
+          <p class="statement-text">
+            <span class="text-line">クライアント様の想いやイメージを誰よりも丁寧に汲み取り、理想を超えるWebサイトを形にします。</span>
+            <span class="text-line">Web クリエイターとしてCursorやAntigravity等の最先端AIツールを縦横無尽に駆使し、</span>
+            <span class="text-line">生産性と素早いキャッチアップ力で、どんなご依頼にも自信を持ってスピーディーかつ高品質にお応えいたします。</span>
+          </p>
+        </div>
+
+        <!-- 番号付きリスト形式での強み解説 -->
+        <ol class="appeal-numbered-list">
+          
+          <li class="appeal-card glass-card fade-in">
+            <div class="appeal-num">01</div>
+            <div class="appeal-icon-wrap">
+              <i class="fa-solid fa-handshake-angle"></i>
+            </div>
+            <h3 class="appeal-card-title">イメージを具現化する寄り添う姿勢</h3>
+            <p class="appeal-card-desc">
+              「まだ具体的なイメージが固まっていない」という段階からでも大歓迎です。丁寧なヒアリングを通じてクライアント様の想いを整理し、最適な形へと導きます。
+            </p>
+          </li>
+
+          <li class="appeal-card glass-card fade-in">
+            <div class="appeal-num">02</div>
+            <div class="appeal-icon-wrap">
+              <i class="fa-solid fa-bolt-lightning"></i>
+            </div>
+            <h3 class="appeal-card-title">AI駆動開発による圧倒的な開発スピード</h3>
+            <p class="appeal-card-desc">
+              AIツールを開発パートナーとして活用することで、通常より大幅に短縮された納期で高品質な成果物をお届け。修正や改善にも即座に対応可能です。
+            </p>
+          </li>
+
+          <li class="appeal-card glass-card fade-in">
+            <div class="appeal-num">03</div>
+            <div class="appeal-icon-wrap">
+              <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <h3 class="appeal-card-title">どんなご依頼にも真摯に向き合う誠実さ</h3>
+            <p class="appeal-card-desc">
+              小規模な修正やバナー設置から新規LP・サイト制作まで、どんな仕事依頼でも喜んで引き受けます。迅速なレスポンスと責任ある対応をお約束します。
+            </p>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- =================================================== -->
+    <!-- 6. お問い合わせセクション（Contact） -->
+    <!-- シンプルな入力フォーム + 24時間以内返信のご案内 -->
+    <!-- =================================================== -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-subtitle">Get In Touch</span>
+          <h2 class="section-title">お問い合わせ</h2>
+          <div class="title-line"></div>
+        </div>
+
+        <!-- 番号付きリストによるご相談・返信の流れ案内 -->
+        <div class="contact-flow-card glass-card fade-in">
+          <h3 class="flow-title"><i class="fa-regular fa-clock"></i> ご相談から返信までの流れ</h3>
+          <ol class="contact-steps-list">
+            <li class="step-item">
+              <span class="step-num">Step 01</span>
+              <span class="step-text">下記フォームよりお名前・メールアドレス・ご相談内容を入力</span>
+            </li>
+            <li class="step-item">
+              <span class="step-num">Step 02</span>
+              <span class="step-text">内容を確認し、ご要望に合わせたご提案・概算見積をご案内</span>
+            </li>
+            <li class="step-item highlight-step">
+              <span class="step-num">Step 03</span>
+              <span class="step-text"><strong>原則24時間以内にご返信いたします</strong></span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- お問い合わせフォーム -->
+        <div class="contact-card glass-card fade-in">
+          <form class="contact-form" id="contact-form">
+            <!-- 名前 -->
+            <div class="form-group">
+              <label for="user-name" class="form-label">
+                お名前 <span class="required-badge">必須</span>
+              </label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-user input-icon"></i>
+                <input type="text" id="user-name" name="name" class="form-input" placeholder="例：山田 太郎" required>
+              </div>
+            </div>
+
+            <!-- メールアドレス -->
+            <div class="form-group">
+              <label for="user-email" class="form-label">
+                メールアドレス <span class="required-badge">必須</span>
+              </label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-envelope input-icon"></i>
+                <input type="email" id="user-email" name="email" class="form-input" placeholder="例：example@domain.com" required>
+              </div>
+            </div>
+
+            <!-- お問い合わせ内容 -->
+            <div class="form-group">
+              <label for="user-message" class="form-label">
+                お問い合わせ内容 <span class="required-badge">必須</span>
+              </label>
+              <div class="input-wrapper">
+                <textarea id="user-message" name="message" class="form-textarea" rows="5" placeholder="Webサイト制作のご相談、お見積りのご依頼、ご質問などお気軽にご記入ください。" required></textarea>
+              </div>
+            </div>
+
+            <!-- 送信ボタン -->
+            <div class="form-submit-wrap">
+              <button type="submit" class="btn-submit" id="submit-btn">
+                <span>送信する</span>
+                <i class="fa-regular fa-paper-plane"></i>
+              </button>
+            </div>
+
+            <p class="form-notice">※ 送信いただいた個人情報は、お問い合わせへの回答および業務連絡の目的にのみ使用いたします。</p>
+          </form>
+
+          <!-- 送信完了トースト通知 -->
+          <div class="form-success-toast" id="form-success-toast" aria-live="polite">
+            <i class="fa-solid fa-circle-check"></i>
+            <div>
+              <h4>お問い合わせありがとうございます</h4>
+              <p>メッセージを受け付けました。24時間以内にご返信いたします。</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- =================================================== -->
+  <!-- フッター -->
+  <!-- =================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-logo">
+        <span class="logo-script">M</span><span class="logo-text">.Miyoshi</span>
+      </div>
+      <p class="footer-copy">© 2026 M.Miyoshi. All Rights Reserved. Built with Passion & AI-Driven Craftsmanship.</p>
+    </div>
+  </footer>
+
+  <!-- =================================================== -->
+  <!-- 画面右下：シャボン玉風フローティングナビゲーション -->
+  <!-- ヒーローセクション以降で出現する固定UI -->
+  <!-- =================================================== -->
+  <div class="floating-bubble-nav" id="floating-bubble-nav" aria-label="フローティングメニュー">
+    <!-- 背景タップでメニューを閉じる透明オーバーレイ -->
+    <div class="bubble-backdrop" id="bubble-backdrop" aria-hidden="true"></div>
+
+    <!-- シャボン玉展開メニュー（バブルリンク群） -->
+    <nav class="bubble-menu-cluster" id="bubble-menu-cluster" aria-label="セクションナビゲーション">
+      <!-- 1. TOP バブル -->
+      <a href="#hero" class="bubble-item bubble-item-1" data-label="TOP" title="トップへ戻る">
+        <span class="bubble-glow"></span>
+        <span class="bubble-content">
+          <i class="fa-solid fa-arrow-up"></i>
+          <span class="bubble-text">TOP</span>
+        </span>
+      </a>
+
+      <!-- 2. About バブル -->
+      <a href="#about" class="bubble-item bubble-item-2" data-label="About" title="自己紹介">
+        <span class="bubble-glow"></span>
+        <span class="bubble-content">
+          <i class="fa-solid fa-user"></i>
+          <span class="bubble-text">About</span>
+        </span>
+      </a>
+
+      <!-- 3. Skills バブル -->
+      <a href="#skills" class="bubble-item bubble-item-3" data-label="Skills" title="スキル一覧">
+        <span class="bubble-glow"></span>
+        <span class="bubble-content">
+          <i class="fa-solid fa-code"></i>
+          <span class="bubble-text">Skills</span>
+        </span>
+      </a>
+
+      <!-- 4. Works バブル -->
+      <a href="#works" class="bubble-item bubble-item-4" data-label="Works" title="制作物">
+        <span class="bubble-glow"></span>
+        <span class="bubble-content">
+          <i class="fa-solid fa-laptop-code"></i>
+          <span class="bubble-text">Works</span>
+        </span>
+      </a>
+
+      <!-- 5. Appeal バブル -->
+      <a href="#appeal" class="bubble-item bubble-item-5" data-label="Appeal" title="私のアピール・強み">
+        <span class="bubble-glow"></span>
+        <span class="bubble-content">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span class="bubble-text">Appeal</span>
+        </span>
+      </a>
+    </nav>
+
+    <!-- 固定ボタン群（縦並び：丸枠ハンバーガーが上、Contactが下） -->
+    <div class="floating-btn-stack">
+      <!-- 丸枠ハンバーガーメニューボタン（バブルトリガー） -->
+      <button class="bubble-toggle-btn" id="bubble-toggle-btn" aria-label="ナビゲーションメニューを開閉する" aria-expanded="false">
+        <!-- クリック時に広がる水面波紋エフェクト要素 -->
+        <span class="ripple-wave" id="ripple-wave"></span>
+        <!-- 光のハイライト反射（シャボン玉らしさ） -->
+        <span class="toggle-bubble-highlight"></span>
+        <!-- 三本線（開閉で「×」に変形） -->
+        <span class="hamburger-bubble-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+
+      <!-- Contactボタン（固定配置：お問い合わせへダイレクト移動） -->
+      <a href="#contact" class="floating-contact-btn" id="floating-contact-btn" aria-label="お問い合わせへスクロール">
+        <span class="contact-bubble-highlight"></span>
+        <i class="fa-regular fa-envelope"></i>
+        <span class="contact-btn-text">Contact</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- スクリプトの読み込み -->
+  <script src="script.js"></script>
+</body>
+</html>
