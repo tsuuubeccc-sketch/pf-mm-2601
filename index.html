@@ -15,8 +15,11 @@
   <!-- Font Awesome Icons (軽量なアイコンセット) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- ヒーロー背景画像のプリロード（ファーストビュー初期描画の最速化） -->
+  <link rel="preload" as="image" href="assets/images/hero_dark_grid.jpg?v=20260906i">
+
   <!-- スタイルシートの読み込み（キャッシュバスティング付き） -->
-  <link rel="stylesheet" href="style.css?v=20260906r">
+  <link rel="stylesheet" href="style.css?v=20260906s">
 </head>
 <body>
 
@@ -261,7 +264,7 @@
           <article class="work-card glass-card fade-in">
             <a href="https://cafe-lp-202608.vercel.app" target="_blank" rel="noopener noreferrer" class="work-thumb-link" aria-label="架空カフェのLPを別タブで開く">
               <div class="work-thumb-wrap">
-                <img src="assets/images/work_cafe.jpg" alt="架空カフェのLP サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy">
+                <img src="assets/images/work_cafe.jpg" alt="架空カフェのLP サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
                 <div class="work-thumb-overlay">
                   <span class="overlay-btn">
                     <span>サイトを見る</span>
@@ -315,7 +318,7 @@
           <article class="work-card glass-card fade-in">
             <a href="https://it-ken-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="work-thumb-link" aria-label="架空IT企業コーポレートサイトを別タブで開く">
               <div class="work-thumb-wrap">
-                <img src="assets/images/work_corp.jpg" alt="架空IT企業コーポレートサイト サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy">
+                <img src="assets/images/work_corp.jpg" alt="架空IT企業コーポレートサイト サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
                 <div class="work-thumb-overlay">
                   <span class="overlay-btn">
                     <span>サイトを見る</span>
@@ -369,7 +372,7 @@
           <article class="work-card glass-card fade-in">
             <a href="https://lst-ryu-202608-be2h.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="work-thumb-link" aria-label="架空レストランWebサイトを別タブで開く">
               <div class="work-thumb-wrap">
-                <img src="assets/images/work_restaurant.jpg" alt="架空レストランWebサイト サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy">
+                <img src="assets/images/work_restaurant.jpg" alt="架空レストランWebサイト サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
                 <div class="work-thumb-overlay">
                   <span class="overlay-btn">
                     <span>サイトを見る</span>
@@ -423,7 +426,7 @@
           <article class="work-card glass-card fade-in">
             <a href="https://ec-eri-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="work-thumb-link" aria-label="架空アパレルECサイトを別タブで開く">
               <div class="work-thumb-wrap">
-                <img src="assets/images/work_apparel.jpg" alt="架空アパレルECサイト サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy">
+                <img src="assets/images/work_apparel.jpg" alt="架空アパレルECサイト サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
                 <div class="work-thumb-overlay">
                   <span class="overlay-btn">
                     <span>サイトを見る</span>
@@ -729,6 +732,6 @@
   </div>
 
   <!-- スクリプトの読み込み（キャッシュバスティング付き） -->
-  <script src="script.js?v=20260906r"></script>
+  <script src="script.js?v=20260906s"></script>
 </body>
 </html>

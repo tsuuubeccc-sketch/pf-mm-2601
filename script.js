@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * 波紋クラス（同心円が広がりながら透明に消える）
+     * - 軽量化: 重い shadowBlur を排除し、繊細な2重アルファストロークで美しい発光感を高速描画
      */
     class Ripple {
       constructor(x, y) {
@@ -71,14 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
       draw() {
         if (this.alpha <= 0) return;
         ctx.save();
+        
+        // 外側の淡いネオングロー線（shadowBlurの代替として高速描画）
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        
-        // 繊細なシアン〜Azureのグラデーション線
+        ctx.strokeStyle = `rgba(14, 165, 233, ${Math.max(this.alpha * 0.35, 0)})`;
+        ctx.lineWidth = this.lineWidth + 2.5;
+        ctx.stroke();
+
+        // 繊細なシアン〜Azureの中心線
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.strokeStyle = `rgba(186, 230, 253, ${Math.max(this.alpha, 0)})`;
         ctx.lineWidth = this.lineWidth;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = `rgba(14, 165, 233, ${Math.max(this.alpha * 0.8, 0)})`;
         ctx.stroke();
 
         // 内側の二重波紋
@@ -95,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * キラキラ粒子（Sparkle）クラス（星のように光って四方に広がる）
+     * - 軽量化: shadowBlur を排除しアルファブレンディングで高速化
      */
     class Sparkle {
       constructor(x, y) {
@@ -128,11 +135,17 @@ document.addEventListener('DOMContentLoaded', () => {
       draw() {
         if (this.alpha <= 0) return;
         ctx.save();
+
+        // 外側の淡い光輪（グロー）
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${Math.max(this.alpha * 0.25, 0)})`;
+        ctx.fill();
+
+        // 中心粒子
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${this.color}, ${Math.max(this.alpha, 0)})`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = `rgba(${this.color}, ${Math.max(this.alpha, 0)})`;
         ctx.fill();
 
         // 4方向の光の筋（十字のきらめき）
@@ -152,9 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 波紋とキラキラを発生させる関数
     const addEffects = (x, y, count = 3) => {
-      ripples.push(new Ripple(x, y));
-      for (let i = 0; i < count; i++) {
-        particles.push(new Sparkle(x, y));
+      // 要素数が過多にならないよう上限制御
+      if (ripples.length < 25) {
+        ripples.push(new Ripple(x, y));
+      }
+      if (particles.length < 60) {
+        for (let i = 0; i < count; i++) {
+          particles.push(new Sparkle(x, y));
+        }
       }
     };
 
@@ -166,12 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const y = e.clientY - rect.top;
 
       const now = Date.now();
-      // 一定間隔（約35ms）ごとにエフェクトを生成して軽快さを維持
-      if (now - lastMoveTime > 35) {
+      // 一定間隔（約45ms）ごとにエフェクトを生成して軽快さを維持
+      if (now - lastMoveTime > 45) {
         addEffects(x, y, 2);
         lastMoveTime = now;
       }
-    });
+    }, { passive: true });
 
     // タッチデバイス（スマホ・タブレット）対応
     heroSection.addEventListener('touchmove', (e) => {
@@ -192,8 +210,16 @@ document.addEventListener('DOMContentLoaded', () => {
       addEffects(randomX, randomY, 2);
     };
 
-    // アニメーションループ描画
+    // アニメーションループ制御（画面外スクロール時は自動一時停止して負荷ゼロ化）
+    let isHeroVisible = true;
+    let animFrameId = null;
+
     const render = () => {
+      if (!isHeroVisible) {
+        animFrameId = null;
+        return; // 画面外時は描画ループを停止
+      }
+
       ctx.clearRect(0, 0, width, height);
 
       // 波紋の更新と描画
@@ -216,27 +242,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // 自然な雫の発生（約120フレームに1回）
+      // 自然な雫の発生（約140フレームに1回）
       autoDropTimer++;
-      if (autoDropTimer > 120) {
+      if (autoDropTimer > 140) {
         triggerAutoDrop();
         autoDropTimer = 0;
       }
 
-      requestAnimationFrame(render);
+      animFrameId = requestAnimationFrame(render);
     };
 
-    // 初回描画開始
-    render();
+    // IntersectionObserver でヒーローセクションの可視性を監視（画面外時は省エネ停止）
+    if ('IntersectionObserver' in window) {
+      const heroVisibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isHeroVisible = entry.isIntersecting;
+          if (isHeroVisible && !animFrameId) {
+            animFrameId = requestAnimationFrame(render);
+          }
+        });
+      }, { threshold: 0.05 });
+
+      heroVisibilityObserver.observe(heroSection);
+    } else {
+      render();
+    }
+
     // 初期波紋を中央付近に1回落とす
     setTimeout(() => {
       addEffects(width / 2, height / 2, 4);
     }, 500);
   }
 
-
-  // --------------------------------------------------------------------------
-  // 2. スクロール連動制御（ヘッダー非表示 ＆ フローティングナビ表示の切り替え）
   // --------------------------------------------------------------------------
   // 2. スクロール連動制御（ヘッダー非表示 ＆ フローティングナビ表示の切り替え）
   // --------------------------------------------------------------------------

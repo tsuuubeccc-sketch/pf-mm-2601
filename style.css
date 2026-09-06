@@ -64,6 +64,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -73,6 +75,9 @@ body {
   line-height: 1.85;
   letter-spacing: 0.03em;
   overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh; /* iOS Safari の動的ツールバー高さに追従 */
+  overscroll-behavior-y: none; /* メニュー開閉時やバウンス時の画面ガタつきを防止 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -116,8 +121,11 @@ button, input, textarea {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh; /* iOS Safari のアドレスバー伸縮による押し上げを防止 */
   background: rgba(2, 6, 23, 0.65);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -126,6 +134,7 @@ button, input, textarea {
   visibility: hidden;
   transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
+  transform: translateZ(0);
 }
 
 .nav-backdrop.is-active {
@@ -153,6 +162,14 @@ button, input, textarea {
 .section {
   padding: 100px 0;
   position: relative;
+}
+
+/* 画面外セクションのレンダリング最適化（初期ロード・スクロール時の描画負荷を大幅軽減） */
+.works-section,
+.appeal-section,
+.contact-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
 
 /* セクションタイトル（明朝体の美しさと英字サブタイトルの調和） */
@@ -224,6 +241,9 @@ button, input, textarea {
   z-index: 1000;
   padding: 18px 0;
   background: transparent;
+  transform: translateZ(0); /* GPUハードウェアアクセラレーションでiOSツールバー変動時のブレを防止 */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding var(--transition-smooth);
 }
 
@@ -231,7 +251,7 @@ button, input, textarea {
 .site-header.is-hidden {
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-100%);
+  transform: translateY(-100%) translateZ(0);
 }
 
 .header-container {
@@ -424,6 +444,7 @@ button, input, textarea {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh; /* iOS Safari の動的ツールバー高さに完全同期 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1330,7 +1351,9 @@ button, input, textarea {
   z-index: 990;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(24px) scale(0.92);
+  transform: translateY(24px) scale(0.92) translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1338,7 +1361,7 @@ button, input, textarea {
 .floating-bubble-nav.is-visible {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0) scale(1);
+  transform: translateY(0) scale(1) translateZ(0);
 }
 
 /* メニュー展開時の背景クリック受け（暗い幕やボケを排除し完全透過で馴染ませる） */
@@ -1346,14 +1369,18 @@ button, input, textarea {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
   z-index: 980;
   pointer-events: none;
   opacity: 0;
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  transform: translateZ(0);
 }
 
 .floating-bubble-nav.is-open .bubble-backdrop {
@@ -1735,7 +1762,7 @@ button, input, textarea {
 
   /* モバイルメニュー展開中はスクロールしてもヘッダーを画面上に固定・維持 */
   body.mobile-menu-open .site-header {
-    transform: none !important;
+    transform: translateZ(0) !important;
     opacity: 1 !important;
     pointer-events: auto !important;
   }
@@ -1752,6 +1779,7 @@ button, input, textarea {
     width: min(280px, 80vw);
     height: auto;
     max-height: calc(100vh - 30px);
+    max-height: calc(100dvh - 30px); /* iOS Safari の動的ツールバー高さに追従 */
     background: #ffffff !important;
     border-bottom-left-radius: 20px;
     border-left: 2px solid #0ea5e9;
@@ -1761,6 +1789,9 @@ button, input, textarea {
     transition: right var(--transition-smooth);
     overflow: hidden;
     z-index: 1000;
+    transform: translateZ(0); /* 描画カクつき防止 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .nav-menu.is-active {
@@ -2010,6 +2041,7 @@ button, input, textarea {
 .thanks-section {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh; /* iOS Safari の動的ツールバー高さに追従 */
   width: 100%;
   display: flex;
   align-items: center;
