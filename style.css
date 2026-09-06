@@ -1962,7 +1962,7 @@ button, input, textarea {
     font-size: 0.78rem;
     line-height: 1.75;
     max-width: 335px;
-    margin: 0 auto;
+    margin: 20px auto 0; /* 送信ボタンとの間隔を確保して少し下に下げる */
     word-break: keep-all;
     overflow-wrap: break-word;
   }
