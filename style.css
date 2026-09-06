@@ -59,6 +59,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent; /* Android・iOS等のタップ時ハイライト枠（青・グレー枠）を無効化 */
 }
 
 html {
@@ -66,6 +67,7 @@ html {
   font-size: 16px;
   height: 100%;
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent; /* 全体でのタップハイライト無効化 */
 }
 
 body {
@@ -94,6 +96,7 @@ a {
   color: inherit;
   text-decoration: none;
   transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent; /* リンクタップ時のハイライト枠を非表示 */
 }
 
 ul, ol {
@@ -106,9 +109,10 @@ img {
   display: block;
 }
 
-button, input, textarea {
+button, input, textarea, select {
   font-family: inherit;
   font-size: inherit;
+  -webkit-tap-highlight-color: transparent; /* ボタン・入力欄タップ時のハイライト枠を非表示 */
 }
 
 /* レスポンシブ用改行制御（PCでは非表示、スマホ表示時のみ有効） */
