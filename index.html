@@ -15,8 +15,8 @@
   <!-- Font Awesome Icons (軽量なアイコンセット) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- スタイルシートの読み込み -->
-  <link rel="stylesheet" href="style.css">
+  <!-- スタイルシートの読み込み（キャッシュバスティング付き） -->
+  <link rel="stylesheet" href="style.css?v=20260906r">
 </head>
 <body>
 
@@ -31,6 +31,21 @@
 
       <!-- ナビゲーションメニュー（英語表記・シンプルなリンクと透過ボタン） -->
       <nav class="nav-menu" id="nav-menu">
+        <!-- モバイルメニュー右側用ノード・ネットワークアタッチメント装飾（ネオン発光カラー） -->
+        <div class="nav-cyber-attachment" aria-hidden="true">
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="15" y1="20" x2="65" y2="45" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.7" />
+            <line x1="65" y1="45" x2="105" y2="25" stroke="#2dd4bf" stroke-width="1.5" stroke-opacity="0.7" />
+            <line x1="65" y1="45" x2="50" y2="95" stroke="#0ea5e9" stroke-width="1.5" stroke-opacity="0.7" />
+            <line x1="50" y1="95" x2="100" y2="100" stroke="#a855f7" stroke-width="1.5" stroke-opacity="0.6" stroke-dasharray="3 3" />
+            <circle cx="15" cy="20" r="4.5" fill="#38bdf8" filter="drop-shadow(0 0 6px #38bdf8)" />
+            <circle cx="65" cy="45" r="6" fill="#0ea5e9" filter="drop-shadow(0 0 8px #0ea5e9)" />
+            <circle cx="105" cy="25" r="4" fill="#2dd4bf" filter="drop-shadow(0 0 6px #2dd4bf)" />
+            <circle cx="50" cy="95" r="5" fill="#38bdf8" filter="drop-shadow(0 0 6px #38bdf8)" />
+            <circle cx="100" cy="100" r="4" fill="#a855f7" filter="drop-shadow(0 0 6px #a855f7)" />
+          </svg>
+        </div>
+
         <ul class="nav-list">
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -49,16 +64,19 @@
     </div>
   </header>
 
+  <!-- モバイルメニュー展開時の全画面背景タップ閉鎖オーバーレイ -->
+  <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+
   <main>
     <!-- =================================================== -->
     <!-- 1. ヒーローセクション（ファーストビュー） -->
     <!-- 背景写真 + 波紋Canvas + M.Miyoshi + Freelance Web Creatorのみ配置 -->
     <!-- =================================================== -->
     <section class="hero-section" id="hero">
-      <!-- 最背面：草原背景画像レイヤー -->
-      <div class="hero-bg-layer" style="background-image: url('assets/images/hero_meadow.jpg');"></div>
+      <!-- 最背面：プロフェッショナルなダークエディタ風ノード・グリッド背景画像レイヤー -->
+      <div class="hero-bg-layer" style="background-image: url('assets/images/hero_dark_grid.jpg?v=20260906i');"></div>
       
-      <!-- 背景オーバーレイ（透明度を上げて写真の美しさを際立たせつつテキスト視認性を確保） -->
+      <!-- 背景オーバーレイ（ネオングローとテキスト視認性を高めるヴィネットグラデーション） -->
       <div class="hero-overlay"></div>
 
       <!-- 中間：マウス軌跡による水面波紋＆キラキラ描画Canvas -->
@@ -94,16 +112,16 @@
         <div class="about-simple-content fade-in">
           <div class="about-lead">
             <p class="lead-text">
-              <span class="text-line">はじめまして、<strong>M.Miyoshi</strong>です。</span>
-              <span class="text-line">フリーランスのエンジニアとして、<strong>ホームページ制作</strong>や<strong>LP制作</strong>を行っております。</span>
+              <span class="text-line">はじめまして、<strong>M.Miyoshi</strong>です。<br class="sp-br"></span>
+              <span class="text-line">フリーランスのエンジニアとして、<br class="sp-br"><strong>ホームページ制作</strong>や<strong>LP制作</strong>を<br class="sp-br">行っております。</span>
             </p>
           </div>
           
           <div class="about-desc">
             <p>
-              <span class="text-line">丁寧なコミュニケーションを何より大切にし、お客様が思い描く世界観やビジネスの強みを、</span>
-              <span class="text-line">繊細で使い心地のよいWebサイトとして形にします。企画段階のイメージの言語化から</span>
-              <span class="text-line">デザイン設計、実装・公開後のサポートまで誠心誠意ご対応いたします。</span>
+              <span class="text-line">丁寧なコミュニケーションを何より大切にし、<br class="sp-br">お客様が思い描く世界観やビジネスの強みを、<br class="sp-br"></span>
+              <span class="text-line">繊細で使い心地のよいWebサイトとして形にします。<br class="sp-br">企画段階のイメージの言語化から<br class="sp-br"></span>
+              <span class="text-line">デザイン設計、実装・公開後のサポートまで<br class="sp-br">誠心誠意ご対応いたします。</span>
             </p>
           </div>
         </div>
@@ -124,7 +142,7 @@
         </div>
 
         <p class="section-intro fade-in">
-          <span class="text-line">確かな基礎技術に加え、最新のAIエディタを制作工程に組み込むことで、</span>
+          <span class="text-line">確かな基礎技術に加え、<br class="sp-br">最新のAIエディタを制作工程に組み込むことで、</span>
           <span class="text-line">高品質かつスピーディーな開発を実現します。</span>
         </p>
 
@@ -221,7 +239,7 @@
 
     <!-- =================================================== -->
     <!-- 4. 今まで作成したサイト（Works / 制作物） -->
-    <!-- iframeによる実画面プレビュー埋め込み + 番号付きリスト -->
+    <!-- サムネイル画像グリッド形式 + 別タブで開く王道ポートフォリオレイアウト -->
     <!-- =================================================== -->
     <section class="section works-section" id="works">
       <div class="container">
@@ -232,293 +250,230 @@
         </div>
 
         <p class="section-intro fade-in">
-          <span class="text-line">架空の企業・店舗を想定して作成した課題制作物です。</span>
+          <span class="text-line">架空の企業・店舗を想定して<br class="sp-br">作成した課題制作物です。<br class="sp-br"></span>
           <span class="text-line section-note">※ 挿入画像などは仮画像として使用しております。</span>
         </p>
 
-        <!-- 番号付きリスト形式でのWorks一覧 -->
-        <ol class="works-numbered-list">
+        <!-- 2列グリッド形式でのWorks一覧（王道ポートフォリオレイアウト） -->
+        <div class="works-grid">
 
           <!-- 作品 01: カフェLP -->
-          <li class="work-list-item glass-card fade-in">
-            <div class="work-header-row">
-              <div class="work-number-badge">Work 01</div>
-              <h3 class="work-title">架空カフェのLP</h3>
-              <div class="work-actions">
-                <a href="https://cafe-lp-202608.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-external" title="別タブで開く">
-                  <span>全画面で見る</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <article class="work-card glass-card fade-in">
+            <a href="https://cafe-lp-202608.vercel.app" target="_blank" rel="noopener noreferrer" class="work-thumb-link" aria-label="架空カフェのLPを別タブで開く">
+              <div class="work-thumb-wrap">
+                <img src="assets/images/work_cafe.jpg" alt="架空カフェのLP サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy">
+                <div class="work-thumb-overlay">
+                  <span class="overlay-btn">
+                    <span>サイトを見る</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <div class="work-card-body">
+              <div class="work-card-header">
+                <span class="work-number-badge">Work 01</span>
+                <span class="work-category-badge">Landing Page</span>
+              </div>
+              <h3 class="work-card-title">
+                <a href="https://cafe-lp-202608.vercel.app" target="_blank" rel="noopener noreferrer">
+                  架空カフェのLP <i class="fa-solid fa-arrow-up-right-from-square title-ext-icon"></i>
                 </a>
-              </div>
-            </div>
+              </h3>
+              <p class="work-card-desc">
+                心地よい木漏れ日と自家製コーヒーの温もりを届ける、落ち着いたトーンのカフェLP。来店予約への導線を自然に配置し、写真を際立たせるレイアウトで店舗の雰囲気をダイレクトに伝えます。
+              </p>
 
-            <div class="work-content-grid">
-              <!-- iframe埋め込みブラウザモックアップ -->
-              <div class="browser-mockup">
-                <div class="mockup-header">
-                  <div class="mockup-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                  </div>
-                  <div class="mockup-address-bar">
-                    <i class="fa-solid fa-lock"></i>
-                    <span>https://cafe-lp-202608.vercel.app</span>
-                  </div>
-                  <div class="mockup-actions">
-                    <button class="mockup-btn-reload" data-target="iframe-work-1" title="再読み込み">
-                      <i class="fa-solid fa-rotate-right"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="iframe-container">
-                  <iframe id="iframe-work-1" src="https://cafe-lp-202608.vercel.app" title="架空カフェのLP" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
-                </div>
+              <div class="work-points-wrap">
+                <h4 class="work-points-title"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
+                <ul class="point-bullet-list">
+                  <li>柔らかなアースカラーと視線誘導を意識したセクション配置</li>
+                  <li>スマートフォン表示でのメニュー閲覧性を重視したレスポンシブ設計</li>
+                </ul>
               </div>
 
-              <!-- 作品解説情報 -->
-              <div class="work-info">
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-file-lines"></i> 概要・コンセプト</h4>
-                  <p class="info-text">
-                    心地よい木漏れ日と自家製コーヒーの温もりを届ける、落ち着いたトーンのカフェLP。
-                    来店予約への導線を自然に配置し、写真を際立たせるレイアウトで店舗の雰囲気をダイレクトに伝えます。
-                  </p>
+              <div class="work-card-footer">
+                <div class="tag-list">
+                  <span class="tech-tag">HTML5</span>
+                  <span class="tech-tag">CSS3</span>
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">Vercel</span>
                 </div>
-
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
-                  <ul class="point-bullet-list">
-                    <li>柔らかなアースカラーと視線誘導を意識したセクション配置</li>
-                    <li>スマートフォン表示でのメニュー閲覧性を重視したレスポンシブ設計</li>
-                  </ul>
-                </div>
-
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-code"></i> 使用技術・担当範囲</h4>
-                  <div class="tag-list">
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">CSS3</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Vercel</span>
-                  </div>
-                  <p class="role-text">担当：企画構成 / UIデザイン / コーディング / デプロイ</p>
+                <p class="role-text">担当：企画構成 / UIデザイン / コーディング / デプロイ</p>
+                <div class="work-link-row">
+                  <a href="https://cafe-lp-202608.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-external">
+                    <span>サイトを開く</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
                 </div>
               </div>
             </div>
-          </li>
-
+          </article>
 
           <!-- 作品 02: IT企業コーポレートサイト -->
-          <li class="work-list-item glass-card fade-in">
-            <div class="work-header-row">
-              <div class="work-number-badge">Work 02</div>
-              <h3 class="work-title">架空IT企業コーポレートサイト</h3>
-              <div class="work-actions">
-                <a href="https://it-ken-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="btn-external" title="別タブで開く">
-                  <span>全画面で見る</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <article class="work-card glass-card fade-in">
+            <a href="https://it-ken-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="work-thumb-link" aria-label="架空IT企業コーポレートサイトを別タブで開く">
+              <div class="work-thumb-wrap">
+                <img src="assets/images/work_corp.jpg" alt="架空IT企業コーポレートサイト サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy">
+                <div class="work-thumb-overlay">
+                  <span class="overlay-btn">
+                    <span>サイトを見る</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <div class="work-card-body">
+              <div class="work-card-header">
+                <span class="work-number-badge">Work 02</span>
+                <span class="work-category-badge">Corporate</span>
+              </div>
+              <h3 class="work-card-title">
+                <a href="https://it-ken-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer">
+                  架空IT企業コーポレートサイト <i class="fa-solid fa-arrow-up-right-from-square title-ext-icon"></i>
                 </a>
-              </div>
-            </div>
+              </h3>
+              <p class="work-card-desc">
+                信頼感と先進性を伝えるITソリューション企業のコーポレートサイト。事業内容・ニュース・会社概要・採用情報などを整然と整理し、見やすさと清潔感を両立しました。
+              </p>
 
-            <div class="work-content-grid">
-              <!-- iframe埋め込みブラウザモックアップ -->
-              <div class="browser-mockup">
-                <div class="mockup-header">
-                  <div class="mockup-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                  </div>
-                  <div class="mockup-address-bar">
-                    <i class="fa-solid fa-lock"></i>
-                    <span>https://it-ken-202608.vercel.app/index.html</span>
-                  </div>
-                  <div class="mockup-actions">
-                    <button class="mockup-btn-reload" data-target="iframe-work-2" title="再読み込み">
-                      <i class="fa-solid fa-rotate-right"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="iframe-container">
-                  <iframe id="iframe-work-2" src="https://it-ken-202608.vercel.app/index.html" title="架空IT企業コーポレートサイト" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
-                </div>
+              <div class="work-points-wrap">
+                <h4 class="work-points-title"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
+                <ul class="point-bullet-list">
+                  <li>信頼性を与える知的で洗練されたブルー系カラースキーム</li>
+                  <li>BtoBユーザーが求める情報へ迷わず辿り着ける明確な情報階層</li>
+                </ul>
               </div>
 
-              <!-- 作品解説情報 -->
-              <div class="work-info">
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-file-lines"></i> 概要・コンセプト</h4>
-                  <p class="info-text">
-                    信頼感と先進性を伝えるITソリューション企業のコーポレートサイト。
-                    事業内容・ニュース・会社概要・採用情報などを整然と整理し、見やすさと清潔感を両立しました。
-                  </p>
+              <div class="work-card-footer">
+                <div class="tag-list">
+                  <span class="tech-tag">HTML5</span>
+                  <span class="tech-tag">CSS3</span>
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">Vercel</span>
                 </div>
-
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
-                  <ul class="point-bullet-list">
-                    <li>信頼性を与える知的で洗練されたブルー系カラースキーム</li>
-                    <li>BtoBユーザーが求める情報へ迷わず辿り着ける明確な情報階層</li>
-                  </ul>
-                </div>
-
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-code"></i> 使用技術・担当範囲</h4>
-                  <div class="tag-list">
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">CSS3</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Vercel</span>
-                  </div>
-                  <p class="role-text">担当：情報設計 / ページ構成 / レスポンシブ実装 / 公開</p>
+                <p class="role-text">担当：情報設計 / ページ構成 / レスポンシブ実装 / 公開</p>
+                <div class="work-link-row">
+                  <a href="https://it-ken-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="btn-external">
+                    <span>サイトを開く</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
                 </div>
               </div>
             </div>
-          </li>
-
+          </article>
 
           <!-- 作品 03: レストランWebサイト -->
-          <li class="work-list-item glass-card fade-in">
-            <div class="work-header-row">
-              <div class="work-number-badge">Work 03</div>
-              <h3 class="work-title">架空レストランWebサイト</h3>
-              <div class="work-actions">
-                <a href="https://lst-ryu-202608-be2h.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="btn-external" title="別タブで開く">
-                  <span>全画面で見る</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <article class="work-card glass-card fade-in">
+            <a href="https://lst-ryu-202608-be2h.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="work-thumb-link" aria-label="架空レストランWebサイトを別タブで開く">
+              <div class="work-thumb-wrap">
+                <img src="assets/images/work_restaurant.jpg" alt="架空レストランWebサイト サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy">
+                <div class="work-thumb-overlay">
+                  <span class="overlay-btn">
+                    <span>サイトを見る</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <div class="work-card-body">
+              <div class="work-card-header">
+                <span class="work-number-badge">Work 03</span>
+                <span class="work-category-badge">Restaurant</span>
+              </div>
+              <h3 class="work-card-title">
+                <a href="https://lst-ryu-202608-be2h.vercel.app/index.html" target="_blank" rel="noopener noreferrer">
+                  架空レストランWebサイト <i class="fa-solid fa-arrow-up-right-from-square title-ext-icon"></i>
                 </a>
-              </div>
-            </div>
+              </h3>
+              <p class="work-card-desc">
+                上質な食体験と特別な時間を演出するダイニングレストランの公式Webサイト。季節のコース料理やシェフのこだわりを情緒的なビジュアルと細やかなタイポグラフィで表現しました。
+              </p>
 
-            <div class="work-content-grid">
-              <!-- iframe埋め込みブラウザモックアップ -->
-              <div class="browser-mockup">
-                <div class="mockup-header">
-                  <div class="mockup-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                  </div>
-                  <div class="mockup-address-bar">
-                    <i class="fa-solid fa-lock"></i>
-                    <span>https://lst-ryu-202608-be2h.vercel.app/index.html</span>
-                  </div>
-                  <div class="mockup-actions">
-                    <button class="mockup-btn-reload" data-target="iframe-work-3" title="再読み込み">
-                      <i class="fa-solid fa-rotate-right"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="iframe-container">
-                  <iframe id="iframe-work-3" src="https://lst-ryu-202608-be2h.vercel.app/index.html" title="架空レストランWebサイト" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
-                </div>
+              <div class="work-points-wrap">
+                <h4 class="work-points-title"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
+                <ul class="point-bullet-list">
+                  <li>高級感とシズル感を引き立てるダークトーン＆ゴールドの調和</li>
+                  <li>コース詳細とオンライン予約へ直結するスムーズな動線設計</li>
+                </ul>
               </div>
 
-              <!-- 作品解説情報 -->
-              <div class="work-info">
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-file-lines"></i> 概要・コンセプト</h4>
-                  <p class="info-text">
-                    上質な食体験と特別な時間を演出するダイニングレストランの公式Webサイト。
-                    季節のコース料理やシェフのこだわりを情緒的なビジュアルと細やかなタイポグラフィで表現しました。
-                  </p>
+              <div class="work-card-footer">
+                <div class="tag-list">
+                  <span class="tech-tag">HTML5</span>
+                  <span class="tech-tag">CSS3</span>
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">レスポンシブ</span>
                 </div>
-
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
-                  <ul class="point-bullet-list">
-                    <li>高級感とシズル感を引き立てるダークトーン＆ゴールドの調和</li>
-                    <li>コース詳細とオンライン予約へ直結するスムーズな動線設計</li>
-                  </ul>
-                </div>
-
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-code"></i> 使用技術・担当範囲</h4>
-                  <div class="tag-list">
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">CSS3</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">レスポンシブ</span>
-                  </div>
-                  <p class="role-text">担当：世界観設計 / メニュー構造化 / コーディング / 最適化</p>
+                <p class="role-text">担当：世界観設計 / メニュー構造化 / コーディング / 最適化</p>
+                <div class="work-link-row">
+                  <a href="https://lst-ryu-202608-be2h.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="btn-external">
+                    <span>サイトを開く</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
                 </div>
               </div>
             </div>
-          </li>
-
+          </article>
 
           <!-- 作品 04: アパレルECサイト -->
-          <li class="work-list-item glass-card fade-in">
-            <div class="work-header-row">
-              <div class="work-number-badge">Work 04</div>
-              <h3 class="work-title">架空アパレルECサイト</h3>
-              <div class="work-actions">
-                <a href="https://ec-eri-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="btn-external" title="別タブで開く">
-                  <span>全画面で見る</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <article class="work-card glass-card fade-in">
+            <a href="https://ec-eri-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="work-thumb-link" aria-label="架空アパレルECサイトを別タブで開く">
+              <div class="work-thumb-wrap">
+                <img src="assets/images/work_apparel.jpg" alt="架空アパレルECサイト サムネイル" class="work-thumb-img" style="width: 100%; height: auto; display: block;" loading="lazy">
+                <div class="work-thumb-overlay">
+                  <span class="overlay-btn">
+                    <span>サイトを見る</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <div class="work-card-body">
+              <div class="work-card-header">
+                <span class="work-number-badge">Work 04</span>
+                <span class="work-category-badge">E-Commerce</span>
+              </div>
+              <h3 class="work-card-title">
+                <a href="https://ec-eri-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer">
+                  架空アパレルECサイト <i class="fa-solid fa-arrow-up-right-from-square title-ext-icon"></i>
                 </a>
-              </div>
-            </div>
+              </h3>
+              <p class="work-card-desc">
+                シンプル＆モダンなトレンドアイテムを取り揃えたファッションECサイト。商品カードのグリッドレイアウトやカート導線など、購買意欲を高めるUI/UXを意識して構築しました。
+              </p>
 
-            <div class="work-content-grid">
-              <!-- iframe埋め込みブラウザモックアップ -->
-              <div class="browser-mockup">
-                <div class="mockup-header">
-                  <div class="mockup-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                  </div>
-                  <div class="mockup-address-bar">
-                    <i class="fa-solid fa-lock"></i>
-                    <span>https://ec-eri-202608.vercel.app/index.html</span>
-                  </div>
-                  <div class="mockup-actions">
-                    <button class="mockup-btn-reload" data-target="iframe-work-4" title="再読み込み">
-                      <i class="fa-solid fa-rotate-right"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="iframe-container">
-                  <iframe id="iframe-work-4" src="https://ec-eri-202608.vercel.app/index.html" title="架空アパレルECサイト" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
-                </div>
+              <div class="work-points-wrap">
+                <h4 class="work-points-title"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
+                <ul class="point-bullet-list">
+                  <li>アイテムが引き立つミニマルな余白設計と直感的なフィルタリングUI</li>
+                  <li>モバイル端末でのショッピング体験を考慮した親指操作エリアの最適化</li>
+                </ul>
               </div>
 
-              <!-- 作品解説情報 -->
-              <div class="work-info">
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-file-lines"></i> 概要・コンセプト</h4>
-                  <p class="info-text">
-                    シンプル＆モダンなトレンドアイテムを取り揃えたファッションECサイト。
-                    商品カードのグリッドレイアウトやカート導線など、購買意欲を高めるUI/UXを意識して構築しました。
-                  </p>
+              <div class="work-card-footer">
+                <div class="tag-list">
+                  <span class="tech-tag">HTML5</span>
+                  <span class="tech-tag">CSS3</span>
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">EC-UI設計</span>
                 </div>
-
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-layer-group"></i> 制作のポイント</h4>
-                  <ul class="point-bullet-list">
-                    <li>アイテムが引き立つミニマルな余白設計と直感的なフィルタリングUI</li>
-                    <li>モバイル端末でのショッピング体験を考慮した親指操作エリアの最適化</li>
-                  </ul>
-                </div>
-
-                <div class="info-block">
-                  <h4 class="info-label"><i class="fa-solid fa-code"></i> 使用技術・担当範囲</h4>
-                  <div class="tag-list">
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">CSS3</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">EC-UI設計</span>
-                  </div>
-                  <p class="role-text">担当：EC-UI設計 / カタロググリッド構築 / スタイリング / 実装</p>
+                <p class="role-text">担当：EC-UI設計 / カタロググリッド構築 / スタイリング / 実装</p>
+                <div class="work-link-row">
+                  <a href="https://ec-eri-202608.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="btn-external">
+                    <span>サイトを開く</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
                 </div>
               </div>
             </div>
-          </li>
+          </article>
 
-        </ol>
+        </div>
       </div>
     </section>
 
@@ -538,9 +493,9 @@
         <!-- アピール自己紹介文（枠を除去し、テキストのみで配置） -->
         <div class="appeal-statement fade-in">
           <p class="statement-text">
-            <span class="text-line">クライアント様の想いやイメージを誰よりも丁寧に汲み取り、理想を超えるWebサイトを形にします。</span>
-            <span class="text-line">Web クリエイターとしてCursorやAntigravity等の最先端AIツールを縦横無尽に駆使し、</span>
-            <span class="text-line">生産性と素早いキャッチアップ力で、どんなご依頼にも自信を持ってスピーディーかつ高品質にお応えいたします。</span>
+            <span class="text-line">クライアント様の想いやイメージを<br class="sp-br">誰よりも丁寧に汲み取り、<br class="sp-br">理想を超えるWebサイトを形にします。<br class="sp-br"></span>
+            <span class="text-line">Web クリエイターとして<br class="sp-br">CursorやAntigravity等の<br class="sp-br">最先端AIツールを縦横無尽に駆使し、<br class="sp-br"></span>
+            <span class="text-line">生産性と素早いキャッチアップ力で、<br class="sp-br">どんなご依頼にも自信を持って<br class="sp-br">スピーディーかつ高品質にお応えいたします。</span>
           </p>
         </div>
 
@@ -616,9 +571,13 @@
           </ol>
         </div>
 
-        <!-- お問い合わせフォーム -->
+        <!-- お問い合わせフォーム（Formspree 連携） -->
         <div class="contact-card glass-card fade-in">
-          <form class="contact-form" id="contact-form">
+          <form class="contact-form" id="contact-form" action="https://formspree.io/f/mqpkdqwd" method="POST">
+            <!-- Formspree 送信完了後のリダイレクト先設定 -->
+            <input type="hidden" name="_next" value="thanks.html">
+            <input type="hidden" name="_subject" value="M.Miyoshi Portfolio からのお問い合わせ">
+
             <!-- 名前 -->
             <div class="form-group">
               <label for="user-name" class="form-label">
@@ -659,7 +618,7 @@
               </button>
             </div>
 
-            <p class="form-notice">※ 送信いただいた個人情報は、お問い合わせへの回答および業務連絡の目的にのみ使用いたします。</p>
+            <p class="form-notice">※ 送信いただいた個人情報は、<br class="sp-br">お問い合わせへの回答および<br class="sp-br">業務連絡の目的にのみ<br class="sp-br">使用いたします。</p>
           </form>
 
           <!-- 送信完了トースト通知 -->
@@ -769,7 +728,7 @@
     </div>
   </div>
 
-  <!-- スクリプトの読み込み -->
-  <script src="script.js"></script>
+  <!-- スクリプトの読み込み（キャッシュバスティング付き） -->
+  <script src="script.js?v=20260906r"></script>
 </body>
 </html>

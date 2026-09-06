@@ -5,9 +5,9 @@
  * 機能概要:
  * 1. ヒーローセクションのCanvas水面波紋（Ripple）＆キラキラ粒子（Sparkle）描画
  * 2. IntersectionObserverを用いた要素のスクロールフェードイン
- * 3. ヘッダーのスクロール追従・透過度変更
+ * 3. ヘッダーのスクロール追従・退避制御
  * 4. モバイル用ナビゲーションメニューの開閉制御
- * 5. Worksセクションのiframe再読み込みボタン
+ * 5. シャボン玉風フローティングナビゲーションの開閉制御
  * 6. お問い合わせフォームのインタラクティブ送信シミュレーション
  * ==========================================================================
  */
@@ -238,16 +238,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   // 2. スクロール連動制御（ヘッダー非表示 ＆ フローティングナビ表示の切り替え）
   // --------------------------------------------------------------------------
+  // 2. スクロール連動制御（ヘッダー非表示 ＆ フローティングナビ表示の切り替え）
+  // --------------------------------------------------------------------------
   const header = document.getElementById('site-header');
   const floatingNav = document.getElementById('floating-bubble-nav');
   const heroEl = document.getElementById('hero');
+  const navMenu = document.getElementById('nav-menu');
 
   // スクロール位置を監視して、ヒーローセクションからメインセクションに入ったかを判定
   const handleScrollUpdate = () => {
+    // モバイルメニュー展開中はヘッダーの非表示化や位置ズレを防ぐため処理をスキップ
+    if (navMenu && navMenu.classList.contains('is-active')) {
+      return;
+    }
+
     // ヒーローセクションの底辺位置（メインセクションの開始位置）を取得
     let threshold = 180;
     if (heroEl) {
-      // ヒーローセクションが画面上部に隠れ始めたタイミング（メインセクション突入時）を検知
       threshold = heroEl.offsetHeight - 80;
     }
 
@@ -342,7 +349,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // 各セクションリンク（シャボン玉バブル）をクリックした際にメニューを閉じる
   bubbleItems.forEach(item => {
     item.addEventListener('click', () => {
-      // 軽快なタップ感を演出してから閉じる
       setTimeout(closeBubbleMenu, 150);
     });
   });
@@ -389,83 +395,100 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. モバイル用ナビゲーションメニューの開閉
   // --------------------------------------------------------------------------
   const menuToggle = document.getElementById('menu-toggle');
-  const navMenu = document.getElementById('nav-menu');
   const navLinks = document.querySelectorAll('.nav-link');
+  const navBackdrop = document.getElementById('nav-backdrop');
+
+  const closeMobileNav = () => {
+    if (navMenu) navMenu.classList.remove('is-active');
+    if (menuToggle) menuToggle.classList.remove('is-active');
+    if (navBackdrop) navBackdrop.classList.remove('is-active');
+    document.body.classList.remove('mobile-menu-open');
+    // メニューを閉じた後にスクロール状態を再評価
+    handleScrollUpdate();
+  };
+
+  const toggleMobileNav = () => {
+    if (!menuToggle || !navMenu) return;
+    const isActive = navMenu.classList.toggle('is-active');
+    menuToggle.classList.toggle('is-active', isActive);
+    if (navBackdrop) navBackdrop.classList.toggle('is-active', isActive);
+    
+    if (isActive) {
+      document.body.classList.add('mobile-menu-open');
+    } else {
+      document.body.classList.remove('mobile-menu-open');
+      handleScrollUpdate();
+    }
+  };
 
   if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('is-active');
-      menuToggle.classList.toggle('is-active');
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMobileNav();
     });
 
     // リンクをクリックした際にメニューを閉じる
     navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('is-active');
-        menuToggle.classList.remove('is-active');
-      });
+      link.addEventListener('click', closeMobileNav);
+    });
+
+    // メニュー枠外（透明オーバーレイ）をタップした際に自然に閉じる
+    if (navBackdrop) {
+      navBackdrop.addEventListener('click', closeMobileNav);
+    }
+
+    // キーボード（Escapeキー）でも閉じる
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileNav();
     });
   }
 
 
-  // --------------------------------------------------------------------------
-  // 5. Worksセクション: iframe再読み込みボタン
-  // --------------------------------------------------------------------------
-  const reloadButtons = document.querySelectorAll('.mockup-btn-reload');
-  reloadButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-target');
-      const targetIframe = document.getElementById(targetId);
-      if (targetIframe) {
-        // 回転アニメーション付与
-        const icon = btn.querySelector('i');
-        if (icon) {
-          icon.style.transform = 'rotate(360deg)';
-          icon.style.transition = 'transform 0.6s ease';
-          setTimeout(() => {
-            icon.style.transform = 'none';
-            icon.style.transition = 'none';
-          }, 600);
-        }
-        // iframeの再読み込み
-        targetIframe.src = targetIframe.src;
-      }
-    });
-  });
-
 
   // --------------------------------------------------------------------------
-  // 6. お問い合わせフォーム送信シミュレーション
+  // 6. お問い合わせフォーム送信（Formspree API 連携）
   // --------------------------------------------------------------------------
   const contactForm = document.getElementById('contact-form');
   const submitBtn = document.getElementById('submit-btn');
   const successToast = document.getElementById('form-success-toast');
 
   if (contactForm && submitBtn && successToast) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault(); // 実際のページリロードを抑止
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault(); // 画面遷移を防ぎ、非同期で送信
 
-      // 送信中状態のUI表現
+      // 送信ボタンをローディング表示に切り替え
       submitBtn.disabled = true;
       const originalText = submitBtn.innerHTML;
       submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>送信中...</span>';
 
-      // 送信完了シミュレーション（1.2秒後に成功トーストを表示）
-      setTimeout(() => {
+      const formData = new FormData(contactForm);
+
+      try {
+        // Formspree エンドポイントへ非同期 POST 送信
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // 送信成功: 入力欄をクリアし、専用サンクスページ（thanks.html）へリダイレクト
+          contactForm.reset();
+          window.location.href = 'thanks.html';
+        } else {
+          // サーバーエラー時の通知
+          alert('メッセージの送信に失敗しました。時間をおいて再度お試しいただくか、直接メールにてお問い合わせください。');
+        }
+      } catch (error) {
+        console.error('Formspree submission error:', error);
+        alert('通信エラーが発生しました。インターネット接続状況をご確認の上、再度お試しください。');
+      } finally {
+        // ボタン表示を元の状態に復帰
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
-        
-        // 入力欄をクリア
-        contactForm.reset();
-
-        // 成功トースト表示
-        successToast.style.display = 'flex';
-        
-        // 5秒後にトーストを閉じる
-        setTimeout(() => {
-          successToast.style.display = 'none';
-        }, 6000);
-      }, 1200);
+      }
     });
   }
 
