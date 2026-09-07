@@ -580,6 +580,41 @@ button, input, textarea, select {
 /* --------------------------------------------------------------------------
    5. 自己紹介セクション（About）
    -------------------------------------------------------------------------- */
+/* プロフィールイラストのラッパー（タイトルと見出し文の間に程よい余白を確保） */
+.about-avatar-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 40px; /* セクション見出しテキストとの間の心地よい余白 */
+}
+
+/* Googleアカウント風の丸型くり抜きアバターコンテナ（静的な埋め込み設定・丸枠サイズ拡大） */
+.about-avatar {
+  position: relative;
+  width: 270px; /* 丸枠を大きめに拡大し存在感をアップ */
+  height: 270px;
+  border-radius: 50%;
+  overflow: hidden; /* 拡大したイラストを綺麗に円形に収めるクリップ設定 */
+  padding: 4px; /* 外枠グラデーションリング */
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.65), rgba(20, 184, 166, 0.45), rgba(255, 255, 255, 0.95));
+  box-shadow: 0 8px 26px rgba(14, 116, 144, 0.1), 0 2px 8px rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* イラスト画像本体（下方向いっぱいに寄せてパーカーの裾を丸枠下端に合わせ、頭上にゆとりを確保） */
+.about-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 47.8%;
+  transform: scale(1.36) translate(-1.2%, 3.5%); /* 左右の完全センタリング＋下方向への配置寄せ（裾を丸枠下端にフィット） */
+  background-color: #ffffff; /* イラストの白背景と同化 */
+  display: block;
+}
+
 .about-simple-content {
   max-width: 860px;
   margin: 0 auto;
@@ -1886,6 +1921,16 @@ button, input, textarea, select {
 }
 
 @media (max-width: 640px) {
+  /* モバイル時の自己紹介アバターサイズ・余白調整（大きめ表示） */
+  .about-avatar-wrap {
+    margin: 0 auto 32px;
+  }
+
+  .about-avatar {
+    width: 210px;
+    height: 210px;
+  }
+
   /* スマートフォン幅でのみWorksを1列に切り替え */
   .works-grid {
     grid-template-columns: 1fr;
