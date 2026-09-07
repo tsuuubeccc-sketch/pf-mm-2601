@@ -586,6 +586,10 @@ button, input, textarea, select {
   justify-content: center;
   align-items: center;
   margin: 0 auto 40px; /* セクション見出しテキストとの間の心地よい余白 */
+  pointer-events: none; /* Android/iOSでの領域全体のタップ・長押し誤作動を完全防止 */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* Googleアカウント風の丸型くり抜きアバターコンテナ（静的な埋め込み設定・丸枠サイズ拡大） */
@@ -601,6 +605,14 @@ button, input, textarea, select {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;        /* Android ChromeやiOSでのタップ・長押しメニューを完全に抑止 */
+  -webkit-touch-callout: none; /* iOS Safariでの長押しポップアップ（画像検索・被写体切り抜き等）を無効化 */
+  -webkit-user-select: none;   /* iOS/Safariでの選択を無効化 */
+  -moz-user-select: none;      /* Firefoxでの選択を無効化 */
+  -ms-user-select: none;       /* IE/Edgeでの選択を無効化 */
+  user-select: none;           /* 一般ブラウザでの選択を無効化 */
+  -webkit-user-drag: none;     /* ドラッグ操作の無効化 */
+  touch-action: pan-y;         /* 縦スクロール以外のタッチ操作・長押しジェスチャーを防止 */
 }
 
 /* イラスト画像本体（下方向いっぱいに寄せてパーカーの裾を丸枠下端に合わせ、頭上にゆとりを確保） */
@@ -613,6 +625,15 @@ button, input, textarea, select {
   transform: scale(1.36) translate(-1.2%, 3.5%); /* 左右の完全センタリング＋下方向への配置寄せ（裾を丸枠下端にフィット） */
   background-color: #ffffff; /* イラストの白背景と同化 */
   display: block;
+  pointer-events: none;        /* 画像自体の長押し・タッチ判定を無効化しAndroid/iOSのメニュー・保存を防止 */
+  -webkit-touch-callout: none; /* iOS Safariでの長押しポップアップ（被写体抽出・画像保存メニュー）を完全無効化 */
+  -webkit-user-select: none;   /* 画像の選択を無効化 */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;     /* 画像のドラッグ操作を無効化 */
+  user-drag: none;
+  touch-action: pan-y;         /* スムーズなスクロールを維持しつつ長押しアクションを抑制 */
 }
 
 .about-simple-content {

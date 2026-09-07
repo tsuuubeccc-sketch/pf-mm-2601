@@ -529,4 +529,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --------------------------------------------------------------------------
+  // 7. 自己紹介プロフィール画像: Android/iOSでの長押しメニュー・保存の完全抑止
+  // --------------------------------------------------------------------------
+  const avatarWrap = document.querySelector('.about-avatar-wrap');
+  if (avatarWrap) {
+    // 右クリックおよび長押しによるコンテキストメニュー（画像保存・Googleレンズ等）を防止
+    avatarWrap.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      return false;
+    });
+
+    // タッチデバイスでの長押しジェスチャー防止
+    avatarWrap.addEventListener('touchstart', (e) => {
+      // 縦スクロールは妨げず、長押し選択・メニューのみ抑制
+    }, { passive: true });
+  }
+
 });
+

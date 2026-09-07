@@ -19,7 +19,7 @@
   <link rel="preload" as="image" href="assets/images/hero_dark_grid.jpg?v=20260906i">
 
   <!-- スタイルシートの読み込み（キャッシュバスティング付き） -->
-  <link rel="stylesheet" href="style.css?v=20260907d">
+  <link rel="stylesheet" href="style.css?v=20260907f">
 </head>
 <body>
 
@@ -111,10 +111,10 @@
           <div class="title-line"></div>
         </div>
 
-        <!-- 自己紹介プロフィールイラスト（Googleアカウント風の丸型くり抜きアイコン） -->
-        <div class="about-avatar-wrap fade-in">
-          <div class="about-avatar">
-            <img src="assets/images/about_me.jpg" alt="M.Miyoshi プロフィールイラスト" class="about-avatar-img" width="270" height="270" loading="lazy">
+        <!-- 自己紹介プロフィールイラスト（Googleアカウント風の丸型くり抜きアイコン・長押しメニュー防止） -->
+        <div class="about-avatar-wrap fade-in" oncontextmenu="return false;">
+          <div class="about-avatar" oncontextmenu="return false;">
+            <img src="assets/images/about_me.jpg" alt="M.Miyoshi プロフィールイラスト" class="about-avatar-img" width="270" height="270" loading="lazy" draggable="false" oncontextmenu="return false;">
           </div>
         </div>
 
@@ -739,6 +739,6 @@
   </div>
 
   <!-- スクリプトの読み込み（キャッシュバスティング付き） -->
-  <script src="script.js?v=20260906s"></script>
+  <script src="script.js?v=20260907a"></script>
 </body>
 </html>
